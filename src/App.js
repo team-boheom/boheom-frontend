@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter } from 'react-router-dom';
+// import { globalStyle } from './styles/GlobalStyle';
+// import { Global, ThemeProvider } from '@emotion/react';
+import { RecoilRoot } from 'recoil';
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+// import { theme } from './styles/Theme';
+import { Toaster } from 'react-hot-toast';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 0,
+      staleTime: 1000,
+      refetchInterval: 0,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      {/* <ThemeProvider theme={theme}>
+        <Global styles={globalStyle} /> */}
+      <RecoilRoot>
+        <Toaster />
+        <BrowserRouter>
+          보험
+          {/* <MainRouter /> */}
+        </BrowserRouter>
+      </RecoilRoot>
+      {/* </ThemeProvider> */}
+    </QueryClientProvider>
   );
 }
 
