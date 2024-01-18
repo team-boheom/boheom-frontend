@@ -5,6 +5,7 @@ import { RecoilRoot } from 'recoil';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 // import { theme } from './styles/Theme';
 import { Toaster } from 'react-hot-toast';
+import { Logo } from './assets';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,7 +26,7 @@ function App() {
       <RecoilRoot>
         <Toaster />
         <BrowserRouter>
-          보험
+          <img src={Logo} />
           {/* <MainRouter /> */}
         </BrowserRouter>
       </RecoilRoot>
