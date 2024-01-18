@@ -65,6 +65,12 @@ export const theme = {
     yellow950: '#28270A',
     yellow1000: '#121202',
   },
+  weight: {
+    regular: '400',
+    medium: '500',
+    semibold: '600',
+    bold: '700',
+  },
   fontSize: {
     header1: '32px',
     header2: '24px',
