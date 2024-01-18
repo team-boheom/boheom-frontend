@@ -1,11 +1,10 @@
 import { Global, ThemeProvider } from '@emotion/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from 'react-hot-toast';
-import { BrowserRouter } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 import MainRouter from './router/MainRouter';
 import { globalStyle } from './styles/GlobalStyle';
-import { theme } from './styles/Theme1';
+import { theme } from './styles/Theme';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,9 +24,7 @@ function App() {
         <Global styles={globalStyle} />
         <RecoilRoot>
           <Toaster />
-          <BrowserRouter>
-            <MainRouter />
-          </BrowserRouter>
+          <MainRouter />
         </RecoilRoot>
       </ThemeProvider>
     </QueryClientProvider>

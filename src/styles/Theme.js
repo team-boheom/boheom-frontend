@@ -66,6 +66,7 @@ export const theme = {
     yellow1000: '#121202',
   },
   weight: {
+    light: '300',
     regular: '400',
     medium: '500',
     semibold: '600',
