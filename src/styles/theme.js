@@ -71,4 +71,14 @@ export const theme = {
       yellow1000: '#121202',
     },
   },
+  font: {
+    fontSize: {
+      header1: '32px',
+      header2: '24px',
+      header3: '20px',
+      body1: '16px',
+      body2: '14px',
+      caption: '12px',
+    }
+  },
 };
