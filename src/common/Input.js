@@ -1,19 +1,22 @@
-import styled from '@emotion/react';
-import { fontSize, weight, color } from '../styles/theme';
+import styled from '@emotion/styled';
 
-const Input = ({ ...props }) => {
-  return <InputContainer {...props} />;
+const Input = ({ width, ...props }) => {
+  return <InputContainer width={width} {...props} />;
 };
 
-const InputContainer = styled.div`
-  width: ${({ props }) => props.width || '100%'};
+const InputContainer = styled.input`
+  width: ${({ width }) => width || '100%'};
   padding: 10px 20px;
   border-radius: 8px;
-  border: ${color.gray200};
-  background: ${color.gray10};
+  ${({ theme }) => ({
+    borderColor: theme.color.gray200,
+    backgroundColor: theme.color.gray10,
+  })}
   ::placeholder {
-    font-size: ${fontSize.header3};
-    font-weight: ${weight.regular};
+    ${({ theme }) => ({
+      fontSize: theme.fontSize.header3,
+      fontWeight: theme.weight.regular,
+    })}
   }
 `;
 
