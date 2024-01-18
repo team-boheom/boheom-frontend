@@ -22,8 +22,6 @@ const ButtonContainer = styled.button`
   padding: 10px 20px;
   display: block;
   &:hover {
-    /* background-color: ${({ color }) =>
-      color || 'white'}; // 기본 색상 설정 */
     filter: brightness(95%);
   }
   cursor: pointer;
