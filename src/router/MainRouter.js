@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 
-const mainRouter = () => {
+const MainRouter = () => {
   return (
     <Routes>
       <Route /> {/* 페이지 맞게 알잘딱 */}
@@ -8,4 +8,4 @@ const mainRouter = () => {
   );
 };
 
-export default mainRouter;
+export default MainRouter;
