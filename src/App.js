@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 import MainRouter from './router/MainRouter';
 import { globalStyle } from './styles/GlobalStyle';
-import { theme } from './styles/theme';
+import { theme } from './styles/Theme1';
 
 const queryClient = new QueryClient({
   defaultOptions: {
