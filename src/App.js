@@ -4,7 +4,7 @@ import { Toaster } from 'react-hot-toast';
 import { RecoilRoot } from 'recoil';
 import MainRouter from './router/MainRouter';
 import { globalStyle } from './styles/GlobalStyle';
-import { theme } from './styles/Theme';
+import theme from './styles/Theme';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -20,8 +20,8 @@ const queryClient = new QueryClient({
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
+      <Global styles={globalStyle} />
       <ThemeProvider theme={theme}>
-        <Global styles={globalStyle} />
         <RecoilRoot>
           <Toaster />
           <MainRouter />

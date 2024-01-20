@@ -16,7 +16,7 @@ const ButtonContainer = styled.button`
   color: ${({ color }) => color || 'black'};
   height: 48px;
   ${({ theme }) => ({
-    fontWeight: theme.weight.bold,
+    fontWeight: theme.fontWeight.bold,
     fontSize: theme.fontSize.header3,
   })}
   padding: 10px 20px;
