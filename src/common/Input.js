@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { useState } from 'react';
 import Eye from '../assets/Eye';
 
-const Input = ({ label, width, type = 'text', ...props }) => {
+const Input = ({ label, width = '100%', type = 'text', ...props }) => {
   const [passwordOpen, setPasswordOpen] = useState(false);
 
   return (
@@ -37,7 +37,7 @@ const Label = styled.p`
 `;
 
 const InputContainer = styled.div`
-  width: ${({ width }) => width || '100%'};
+  width: ${({ width }) => width};
   border-radius: 8px;
   display: flex;
   align-items: center;
