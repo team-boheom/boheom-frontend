@@ -6,8 +6,8 @@ const Input = ({ label, width = '100%', type = 'text', ...props }) => {
   const [passwordOpen, setPasswordOpen] = useState(false);
 
   return (
-    <div>
-      {label && <Label className="label">{label}</Label>}
+    <Wrapper>
+      {label && <p className="label">{label}</p>}
       <InputContainer width={width}>
         <input
           type={type !== 'password' ? type : passwordOpen ? 'text' : 'password'}
@@ -23,21 +23,24 @@ const Input = ({ label, width = '100%', type = 'text', ...props }) => {
           </EyeContainer>
         )}
       </InputContainer>
-    </div>
+    </Wrapper>
   );
 };
 
-const Label = styled.p`
-  margin-bottom: 4px;
-  ${({ theme }) => ({
-    fontSize: theme.fontSize.body2,
-    fontWeight: theme.fontWeight.regular,
-    color: theme.color.gray500,
-  })}
+const Wrapper = styled.div`
+  width: ${({ width }) => width};
+  > .label {
+    margin-bottom: 4px;
+    ${({ theme }) => ({
+      fontSize: theme.fontSize.body2,
+      fontWeight: theme.fontWeight.regular,
+      color: theme.color.gray500,
+    })}
+  }
 `;
 
 const InputContainer = styled.div`
-  width: ${({ width }) => width};
+  width: 100%;
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -47,12 +50,12 @@ const InputContainer = styled.div`
     backgroundColor: theme.color.gray10,
   })}
   > input {
+    width: 100%;
     ${({ theme }) => ({
       fontWeight: theme.fontWeight.regular,
       fontSize: theme.fontSize.body1,
     })}
     padding: 10px 20px;
-    flex: 1;
     border: none;
     background: none;
     outline: none;
