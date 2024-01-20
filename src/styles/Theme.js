@@ -1,4 +1,4 @@
-export const theme = {
+const theme = {
   color: {
     white: '#ffffff',
     black: '#000000',
@@ -65,7 +65,7 @@ export const theme = {
     yellow950: '#28270A',
     yellow1000: '#121202',
   },
-  weight: {
+  fontWeight: {
     light: '300',
     regular: '400',
     medium: '500',
@@ -81,3 +81,5 @@ export const theme = {
     caption: '12px',
   },
 };
+
+export default theme;
