@@ -1,7 +1,11 @@
+import Layout from '../components/Layout';
+
 const MainPage = () => {
   return (
     <>
-      <h1>MainPage</h1>
+      <Layout>
+        <h1>MainPage</h1>
+      </Layout>
     </>
   );
 };
