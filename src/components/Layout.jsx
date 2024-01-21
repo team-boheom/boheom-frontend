@@ -6,7 +6,6 @@ const Layout = ({ marginX = '16.5vw', children }) => {
 
 const Wrapper = styled.div`
   width: 100vw;
-  height: 100vh;
   margin: 80px 0;
   padding: ${({ marginX }) => `0 ${marginX}`};
   @media screen and (max-width: 900px) {
