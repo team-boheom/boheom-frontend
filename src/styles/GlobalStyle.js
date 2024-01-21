@@ -33,7 +33,6 @@ export const globalStyle = css`
 	  padding: 0;
 	  border: 0;
 	  font-size: 100%;
-	  font: inherit;
 	  vertical-align: baseline;
   }
 /* HTML5 display-role reset for older browsers */
@@ -58,5 +57,8 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+}
+input {
+  outline: none;
 }
 `;

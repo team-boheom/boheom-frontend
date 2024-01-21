@@ -58,7 +58,6 @@ const InputContainer = styled.div`
     padding: 10px 20px;
     border: none;
     background: none;
-    outline: none;
     ::placeholder {
       ${({ theme }) => ({
         color: theme.color.gray500,
