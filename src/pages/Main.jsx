@@ -1,12 +1,12 @@
 import Layout from '../components/Layout';
-import SearchInput from '../components/SearchInput';
+import Header from '../components/Header_';
 
 const MainPage = () => {
   return (
     <>
+      <Header />
       <Layout>
         <h1>MainPage</h1>
-        <SearchInput />
       </Layout>
     </>
   );
