@@ -1,15 +1,109 @@
 import Layout from '../components/Layout';
-import SearchInput from '../components/SearchInput';
+import styled from '@emotion/styled';
+import PostCard from '../components/PostCard';
 
 const MainPage = () => {
   return (
-    <>
-      <Layout>
-        <h1>MainPage</h1>
-        <SearchInput />
-      </Layout>
-    </>
+    <Layout marginX="6.5vw">
+      <Title>
+        <span className="highlight">보</span>드게임
+        <br /> 모<span className="highlight">험</span>을 찾아서
+      </Title>
+      <Contents>
+        {`보드게임을 하고 싶은데 할 사람이 없거나 찾고 있으신가요? 
+이곳 보험에서 팀원들을 모집하고 보드게임을 즐겨보세요!`}
+      </Contents>
+      <AreaLayout>
+        <div className="partition">
+          <div>
+            <p className="title">최근에 올라온 게시글</p>
+            <CardListGrid>
+              <PostCard
+                tags={['뱅', '모여라']}
+                title={'같이 뱅 하실래요?'}
+                content={
+                  '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
+                }
+                view={25}
+                apply_count={1}
+                recruitment={4}
+                id={1}
+              />
+            </CardListGrid>
+          </div>
+          <div>
+            <p className="title">가장 인기있는 게시글</p>
+            <CardListGrid>
+              <input />
+              <input />
+              <input />
+              <input />
+              <input />
+              <input />
+            </CardListGrid>
+          </div>
+        </div>
+      </AreaLayout>
+    </Layout>
   );
 };
+
+const Title = styled.h1`
+  ${({ theme }) => ({
+    fontSize: theme.fontSize.header1,
+    fontWeight: theme.fontWeight.bold,
+    color: theme.color.black,
+  })}
+  line-height: normal;
+  > .highlight {
+    color: ${({ theme }) => theme.color.green600};
+  }
+`;
+
+const Contents = styled.p`
+  white-space: pre-wrap;
+  line-height: 20px;
+  margin-top: 20px;
+`;
+
+const AreaLayout = styled.div`
+  width: 100%;
+  margin-top: 70px;
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 68px;
+  grid-row-gap: 70px;
+  @media screen and (max-width: 900px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+  > .partition {
+    display: flex;
+    flex-direction: column;
+    gap: 70px;
+  }
+  .title {
+    margin-bottom: 16px;
+    ${({ theme }) => ({
+      fontSize: theme.fontSize.header2,
+      fontWeight: theme.fontWeight.semibold,
+      color: theme.color.gray700,
+    })}
+  }
+`;
+
+const CardListGrid = styled.div`
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-column-gap: 16px;
+  grid-row-gap: 14px;
+  @media screen and (max-width: 650px) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+  }
+`;
 
 export default MainPage;
