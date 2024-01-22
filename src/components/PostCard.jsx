@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { Person, View } from '../assets';
 import { Link } from 'react-router-dom';
+import Medal from '../assets/Medal';
 
 const PostCard = ({
   tags,
@@ -10,12 +11,13 @@ const PostCard = ({
   recruitment,
   apply_count,
   id,
+  ranking,
 }) => {
   return (
     <Container to={`/post/${id}`}>
       <div>
-        {tags.map((item) => (
-          <Tag>#{item}</Tag>
+        {tags.map((item, idx) => (
+          <Tag key={idx}>#{item}</Tag>
         ))}
       </div>
       <TextContents>
@@ -38,6 +40,11 @@ const PostCard = ({
           </p>
         </div>
       </EtcInfo>
+      {ranking && (
+        <Ranking>
+          <Medal rank={ranking} />
+        </Ranking>
+      )}
     </Container>
   );
 };
@@ -48,8 +55,11 @@ const Container = styled(Link)`
   border-radius: 8px;
   box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.05);
   padding: 20px 24px;
+  position: relative;
+  overflow: hidden;
   cursor: pointer;
   transition: 0.2s all;
+  outline-color: ${({ theme }) => theme.color.green150};
   :hover {
     scale: 1.02;
   }
@@ -112,6 +122,17 @@ const EtcInfo = styled.div`
       color: theme.color.gray500,
     })}
   }
+`;
+
+const Ranking = styled.div`
+  position: absolute;
+  top: -24px;
+  right: -24px;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background-color: ${({ theme }) => theme.color.green150};
+  padding: 32px 0 0 14px;
 `;
 
 export default PostCard;
