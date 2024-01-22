@@ -2,11 +2,14 @@ import { Link } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { ReactComponent as Boheom } from '../assets/Boheom.svg';
 import SearchInput from './SearchInput';
+import { withTheme } from '@emotion/react';
 
 const Header = () => {
   return (
     <Wrapper>
-      <Boheom width="88" height="25" />
+      <Link to="/">
+        <Boheom width="88" height="25" />
+      </Link>
       <SearchInput />
       <Content>
         <StyledLink to="/CreatePost">글 등록하기</StyledLink>
@@ -29,6 +32,7 @@ const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   z-index: 1000;
+  background-color: ${({ theme }) => theme.color.white};
 `;
 
 const Content = styled.div`
