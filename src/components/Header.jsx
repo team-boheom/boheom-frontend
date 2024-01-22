@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { ReactComponent as Boheom } from '../assets/Boheom.svg';
 import SearchInput from './SearchInput';
-import { withTheme } from '@emotion/react';
 
 const Header = () => {
   return (
