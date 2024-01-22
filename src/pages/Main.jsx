@@ -1,6 +1,7 @@
 import Layout from '../components/Layout';
 import styled from '@emotion/styled';
-import PostCard from '../components/PostCard';
+import PostCard from '../common/PostCard';
+import CategoryWrapper from '../components/mainPage/CategoryWrapper';
 
 const MainPage = () => {
   return (
@@ -18,6 +19,62 @@ const MainPage = () => {
           <div>
             <p className="title">최근에 올라온 게시글</p>
             <CardListGrid>
+              {/* 퍼블리싱용 더미 값들 */}
+              <PostCard
+                tags={['뱅', '모여라']}
+                title={'같이 뱅 하실래요?'}
+                content={
+                  '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
+                }
+                view={25}
+                apply_count={1}
+                recruitment={4}
+                id={1}
+              />
+              <PostCard
+                tags={['뱅', '모여라']}
+                title={'같이 뱅 하실래요?'}
+                content={
+                  '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
+                }
+                view={25}
+                apply_count={1}
+                recruitment={4}
+                id={1}
+              />
+              <PostCard
+                tags={['뱅', '모여라']}
+                title={'같이 뱅 하실래요?'}
+                content={
+                  '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
+                }
+                view={25}
+                apply_count={1}
+                recruitment={4}
+                id={1}
+              />
+              <PostCard
+                tags={['뱅', '모여라']}
+                title={'같이 뱅 하실래요?'}
+                content={
+                  '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
+                }
+                view={25}
+                apply_count={1}
+                recruitment={4}
+                id={1}
+              />
+              <PostCard
+                tags={['뱅', '모여라']}
+                title={'같이 뱅 하실래요?'}
+                content={
+                  '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
+                }
+                view={25}
+                apply_count={1}
+                recruitment={4}
+                id={1}
+              />
               <PostCard
                 tags={['뱅', '모여라']}
                 title={'같이 뱅 하실래요?'}
@@ -34,15 +91,179 @@ const MainPage = () => {
           <div>
             <p className="title">가장 인기있는 게시글</p>
             <CardListGrid>
-              <input />
-              <input />
-              <input />
-              <input />
-              <input />
-              <input />
+              <PostCard
+                tags={['뱅', '모여라']}
+                title={'같이 뱅 하실래요?'}
+                content={
+                  '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
+                }
+                view={25}
+                apply_count={1}
+                recruitment={4}
+                id={1}
+                ranking={1}
+              />
+              <PostCard
+                tags={['뱅', '모여라']}
+                title={'같이 뱅 하실래요?'}
+                content={
+                  '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
+                }
+                view={25}
+                apply_count={1}
+                recruitment={4}
+                id={1}
+                ranking={2}
+              />
+              <PostCard
+                tags={['뱅', '모여라']}
+                title={'같이 뱅 하실래요?'}
+                content={
+                  '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
+                }
+                view={25}
+                apply_count={1}
+                recruitment={4}
+                id={1}
+                ranking={3}
+              />
+              <PostCard
+                tags={['뱅', '모여라']}
+                title={'같이 뱅 하실래요?'}
+                content={
+                  '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
+                }
+                view={25}
+                apply_count={1}
+                recruitment={4}
+                id={1}
+              />
+              <PostCard
+                tags={['뱅', '모여라']}
+                title={'같이 뱅 하실래요?'}
+                content={
+                  '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
+                }
+                view={25}
+                apply_count={1}
+                recruitment={4}
+                id={1}
+              />
+              <PostCard
+                tags={['뱅', '모여라']}
+                title={'같이 뱅 하실래요?'}
+                content={
+                  '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
+                }
+                view={25}
+                apply_count={1}
+                recruitment={4}
+                id={1}
+              />
             </CardListGrid>
           </div>
         </div>
+        <Category>
+          <p className="title">카테고리 별 게시글</p>
+          <div>
+            <CategoryWrapper type="puzzle">
+              <PostCard
+                tags={['뱅', '모여라']}
+                title={'같이 뱅 하실래요?'}
+                content={
+                  '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
+                }
+                view={25}
+                apply_count={1}
+                recruitment={4}
+                id={1}
+              />
+              <PostCard
+                tags={['뱅', '모여라']}
+                title={'같이 뱅 하실래요?'}
+                content={
+                  '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
+                }
+                view={25}
+                apply_count={1}
+                recruitment={4}
+                id={1}
+              />
+            </CategoryWrapper>
+            <CategoryWrapper type="strategy">
+              <PostCard
+                tags={['뱅', '모여라']}
+                title={'같이 뱅 하실래요?'}
+                content={
+                  '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
+                }
+                view={25}
+                apply_count={1}
+                recruitment={4}
+                id={1}
+              />
+              <PostCard
+                tags={['뱅', '모여라']}
+                title={'같이 뱅 하실래요?'}
+                content={
+                  '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
+                }
+                view={25}
+                apply_count={1}
+                recruitment={4}
+                id={1}
+              />
+            </CategoryWrapper>
+            <CategoryWrapper type="card">
+              <PostCard
+                tags={['뱅', '모여라']}
+                title={'같이 뱅 하실래요?'}
+                content={
+                  '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
+                }
+                view={25}
+                apply_count={1}
+                recruitment={4}
+                id={1}
+              />
+              <PostCard
+                tags={['뱅', '모여라']}
+                title={'같이 뱅 하실래요?'}
+                content={
+                  '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
+                }
+                view={25}
+                apply_count={1}
+                recruitment={4}
+                id={1}
+              />
+            </CategoryWrapper>
+            <CategoryWrapper type="collaboration">
+              <PostCard
+                tags={['뱅', '모여라']}
+                title={'같이 뱅 하실래요?'}
+                content={
+                  '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
+                }
+                view={25}
+                apply_count={1}
+                recruitment={4}
+                id={1}
+              />
+              <PostCard
+                tags={['뱅', '모여라']}
+                title={'같이 뱅 하실래요?'}
+                content={
+                  '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
+                }
+                view={25}
+                apply_count={1}
+                recruitment={4}
+                id={1}
+              />
+            </CategoryWrapper>
+          </div>
+        </Category>
       </AreaLayout>
     </Layout>
   );
@@ -103,6 +324,14 @@ const CardListGrid = styled.div`
   @media screen and (max-width: 650px) {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
+  }
+`;
+
+const Category = styled.div`
+  > div {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
   }
 `;
 
