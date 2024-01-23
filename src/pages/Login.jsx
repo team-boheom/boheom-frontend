@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
-import { ReactComponent as Logo } from '../assets/Logo.svg';
-import { ReactComponent as Boheom } from '../assets/Boheom.svg';
+import { default as Logo } from '../assets/Logo.svg';
+import { default as Boheom } from '../assets/Boheom.svg';
 import Input from '../common/Input';
 import Button from '../common/Button';
 
@@ -15,8 +15,8 @@ const Login = () => {
   return (
     <Wrapper>
       <LogoBox>
-        <Logo width="120" height="120" />
-        <Boheom width="102" height="24" />
+        <StyledLogo src={Logo} alt="로고" />
+        <StyledBoheom src={Boheom} alt="보험" />
       </LogoBox>
       <Content>
         <Input
@@ -61,6 +61,16 @@ const LogoBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`;
+
+const StyledLogo = styled.img`
+  width: 120px;
+  height: 120px;
+`;
+
+const StyledBoheom = styled.img`
+  width: 102px;
+  height: 24px;
 `;
 
 const Content = styled.div`

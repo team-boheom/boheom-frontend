@@ -5,7 +5,7 @@ import Eye from '../assets/Eye';
 const Input = ({
   label,
   width = '100%',
-  height = '100%',
+  height = '48px',
   type = 'text',
   ...props
 }) => {
@@ -58,7 +58,7 @@ const InputContainer = styled.div`
   })}
   > input {
     width: 100%;
-    height: 48px;
+    height: 100%;
     ${({ theme }) => ({
       fontWeight: theme.fontWeight.regular,
       fontSize: theme.fontSize.body1,
