@@ -2,13 +2,19 @@ import styled from '@emotion/styled';
 import { useState } from 'react';
 import Eye from '../assets/Eye';
 
-const Input = ({ label, width = '100%', type = 'text', ...props }) => {
+const Input = ({
+  label,
+  width = '100%',
+  height = '100%',
+  type = 'text',
+  ...props
+}) => {
   const [passwordOpen, setPasswordOpen] = useState(false);
 
   return (
     <Wrapper>
       {label && <p className="label">{label}</p>}
-      <InputContainer width={width}>
+      <InputContainer width={width} height={height}>
         <input
           type={type !== 'password' ? type : passwordOpen ? 'text' : 'password'}
           {...props}
@@ -40,7 +46,8 @@ const Wrapper = styled.div`
 `;
 
 const InputContainer = styled.div`
-  width: 100%;
+  width: ${({ width }) => width};
+  height: ${({ height }) => height};
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -51,6 +58,7 @@ const InputContainer = styled.div`
   })}
   > input {
     width: 100%;
+    height: 100%;
     ${({ theme }) => ({
       fontWeight: theme.fontWeight.regular,
       fontSize: theme.fontSize.body1,
