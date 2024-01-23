@@ -68,7 +68,7 @@ const Wrapper = styled.div`
 
 const LogoBox = styled.div`
   width: 160px;
-  height: 158px;
+  height: 130px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -80,12 +80,12 @@ const Desc = styled.p`
 `;
 
 const Content = styled.div`
-  height: 496px;
+  height: 460px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  margin-top: 47px;
+  margin-top: 30px;
 `;
 
 const StyledLink = styled(Link)`
