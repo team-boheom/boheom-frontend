@@ -58,7 +58,7 @@ const InputContainer = styled.div`
   })}
   > input {
     width: 100%;
-    height: 100%;
+    height: 48px;
     ${({ theme }) => ({
       fontWeight: theme.fontWeight.regular,
       fontSize: theme.fontSize.body1,
