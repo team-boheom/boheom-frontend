@@ -77,6 +77,10 @@ const LogoBox = styled.div`
 
 const Desc = styled.p`
   color: ${({ theme }) => theme.color.gray500};
+  ${({ theme }) => ({
+    fontWeight: theme.fontWeight.light,
+    fontSize: theme.fontSize.body1,
+  })}
 `;
 
 const Content = styled.div`
