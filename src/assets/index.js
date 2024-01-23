@@ -6,3 +6,5 @@ export { default as Puzzle } from './Puzzle.svg';
 export { default as Sparkles } from './Sparkles.svg';
 export { default as Card } from './Card.svg';
 export { default as People } from './People.svg';
+export { default as ArrowLeft } from './ArrowLeft.svg';
+export { default as ArrowRight } from './ArrowRight.svg';
