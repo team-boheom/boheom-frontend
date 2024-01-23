@@ -63,6 +63,12 @@ const CardListGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 16px;
+  @media screen and (max-width: 900px) {
+    grid-gap: 24px;
+  }
+  @media screen and (max-width: 650px) {
+    grid-gap: 16px;
+  }
 `;
 
 export default CategoryWrapper;
