@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
-import { ReactComponent as Logo } from '../assets/Logo.svg';
+import { default as Logo } from '../assets/Logo.svg';
 import Input from '../common/Input';
 import Button from '../common/Button';
 
@@ -14,7 +14,7 @@ const Signup = () => {
   return (
     <Wrapper>
       <LogoBox>
-        <Logo width="100" height="100" />
+        <StyledLogo src={Logo} alt="로고" />
         <Desc>보드게임 모임을 찾아서</Desc>
       </LogoBox>
       <Content>
@@ -73,6 +73,11 @@ const LogoBox = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+`;
+
+const StyledLogo = styled.img`
+  width: 100px;
+  height: 100px;
 `;
 
 const Desc = styled.p`
