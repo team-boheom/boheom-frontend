@@ -5,15 +5,17 @@ import PostPage from '../pages/Post';
 import CreatePostPage from '../pages/CreatePost';
 import Login from '../pages/Login';
 import Signup from '../pages/Signup';
+import Header from '../components/Header';
 
 const MainRouter = () => {
   return (
     <BrowserRouter>
+      <Header />
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/post">
           <Route path="" element={<PostPage />} />
-          <Route path=":id" element={<MyPage />} />
+          <Route path=":id" element={<PostPage />} />
         </Route>
         <Route path="/createPost" element={<CreatePostPage />} />
         <Route path="/mypage" element={<MyPage />} />

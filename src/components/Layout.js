@@ -8,6 +8,7 @@ const Wrapper = styled.div`
   width: 100vw;
   margin: 80px 0;
   padding: ${({ marginX }) => `0 ${marginX}`};
+  padding-top: 60px;
   @media screen and (max-width: 900px) {
     padding: 0 6.5vw;
   }
