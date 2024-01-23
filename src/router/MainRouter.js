@@ -13,7 +13,7 @@ const MainRouter = () => {
         <Route path="/" element={<MainPage />} />
         <Route path="/post">
           <Route path="" element={<PostPage />} />
-          <Route path=":id" element={<MyPage />} />
+          <Route path=":id" element={<PostPage />} />
         </Route>
         <Route path="/createPost" element={<CreatePostPage />} />
         <Route path="/mypage" element={<MyPage />} />
