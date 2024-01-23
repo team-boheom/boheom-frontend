@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import theme from '../../styles/Theme';
 import { Puzzle, Sparkles, Card, People } from '../../assets/index';
 
-const bgColors = {
+const categoryStyle = {
   puzzle: {
     category: '#퍼즐',
     color: theme.color.green100,
@@ -27,10 +27,10 @@ const bgColors = {
 
 const CategoryWrapper = ({ type, children }) => {
   return (
-    <Container bgColor={bgColors[type].color}>
+    <Container bgColor={categoryStyle[type].color}>
       <div className="head">
-        <span className="sub_title">{bgColors[type].category}</span>
-        <img src={bgColors[type].img} alt={bgColors[type].category} />
+        <span className="sub_title">{categoryStyle[type].category}</span>
+        <img src={categoryStyle[type].img} alt={categoryStyle[type].category} />
       </div>
       <CardListGrid>{children}</CardListGrid>
     </Container>
