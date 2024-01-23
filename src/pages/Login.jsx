@@ -78,6 +78,10 @@ const StyledLink = styled(Link)`
   text-decoration: underline;
   text-underline-position: under;
   margin-top: 50px;
+  ${({ theme }) => ({
+    fontWeight: theme.fontWeight.regular,
+    fontSize: theme.fontSize.body2,
+  })}
 `;
 
 export default Login;
