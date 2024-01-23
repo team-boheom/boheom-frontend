@@ -297,7 +297,7 @@ const AreaLayout = styled.div`
   grid-row-gap: 70px;
   @media screen and (max-width: 900px) {
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 2
   }
   > .partition {
     display: flex;
