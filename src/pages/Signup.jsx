@@ -1,7 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { ReactComponent as Logo } from '../assets/Logo.svg';
-import { ReactComponent as Boheom } from '../assets/Boheom.svg';
 import Input from '../common/Input';
 import Button from '../common/Button';
 
