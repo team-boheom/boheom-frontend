@@ -6,22 +6,24 @@ import CreatePostPage from '../pages/CreatePost';
 import Login from '../pages/Login';
 import Signup from '../pages/Signup';
 import OutletRouter from './OutlitRouter';
+import Landing from '../pages/Landing';
 
 const MainRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route exact element={<OutletRouter />}>
-          <Route path="/" element={<MainPage />} />
+          <Route path="/main" element={<MainPage />} />
           <Route path="/post">
             <Route path="" element={<PostPage />} />
             <Route path=":id" element={<PostPage />} />
           </Route>
-          <Route path="/createPost" element={<CreatePostPage />} />
+          <Route path="/CreatePost" element={<CreatePostPage />} />
           <Route path="/mypage" element={<MyPage />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/" element={<Landing />} />
       </Routes>
     </BrowserRouter>
   );
