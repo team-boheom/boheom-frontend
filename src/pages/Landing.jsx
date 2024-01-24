@@ -1,6 +1,5 @@
 import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
-import { useState, useEffect } from 'react';
 import { Logo } from '../assets';
 import { Outlet, useNavigate } from 'react-router-dom';
 
@@ -13,50 +12,28 @@ const fadeIn = keyframes`
   }
 `;
 
+/**
+ * @todos state 관리 없애고 미리 렌더링 다 박아논 다음에 css
+ * 사용해서 안 끊기고 관리하기
+ */
+
 const LandingPage = () => {
   const imageText = { image: `${Logo}`, text: 'Boheom' };
-  const [showImage, setShowImage] = useState(false);
-  const [showAuth, setShowAuth] = useState(false);
-  const [showText, setShowText] = useState(false);
-  const [showButton, setShowButton] = useState(false);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const timers = [
-      setTimeout(() => {
-        setShowImage(true);
-      }, 0),
-      setTimeout(() => {
-        setShowAuth(true);
-      }, 0),
-      setTimeout(() => {
-        setShowText(true);
-      }, 1500),
-      setTimeout(() => {
-        setShowButton(true);
-      }, 2000),
-    ];
-
-    return () => timers.forEach(clearTimeout);
-  }, [showImage, showText, showButton]);
 
   return (
     <Wrapper>
-      {showImage && <Image src={imageText.image} alt="Display" />}
-      {showAuth && <Auth>{imageText.text}</Auth>}
-      {showText && <Text>보험, 보드게임 모험을 찾아서</Text>}
-      {showButton && (
-        <>
-          <div>
-            이미 계정이 있으신가요?
-            <GoAuth onClick={() => navigate('/login')}> 로그인하기</GoAuth>
-          </div>
-          <div>
-            계정이 없으신가요?
-            <GoAuth onClick={() => navigate('/signup')}> 회원가입하기</GoAuth>
-          </div>
-        </>
-      )}
+      <Image src={imageText.image} alt="Display" />
+      <Auth>{imageText.text}</Auth>
+      <Text>보험, 보드게임 모험을 찾아서</Text>
+      <div>
+        이미 계정이 있으신가요?
+        <GoAuth onClick={() => navigate('/login')}> 로그인하기</GoAuth>
+      </div>
+      <div>
+        계정이 없으신가요?
+        <GoAuth onClick={() => navigate('/signup')}> 회원가입하기</GoAuth>
+      </div>
       <Outlet />
     </Wrapper>
   );
@@ -70,6 +47,11 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 50px;
+  > div {
+    opacity: 0;
+    animation: ${fadeIn} 1.5s ease-in-out forwards;
+    animation-delay: 3.5s;
+  }
 `;
 
 const Image = styled.img`
@@ -89,14 +71,16 @@ const Auth = styled.p`
   line-height: 24px;
   letter-spacing: 10.5px;
 `;
-
 const Text = styled.p`
-  animation: ${fadeIn} 2s ease-in-out;
+  opacity: 0;
+  animation: ${fadeIn} 2s ease-in-out forwards;
   ${({ theme }) => ({
     fontSize: theme.fontSize.header1,
     fontWeight: theme.fontWeight.light,
     color: theme.color.black,
   })}
+
+  animation-delay: 2s;
 `;
 
 const GoAuth = styled.span`
@@ -107,6 +91,7 @@ const GoAuth = styled.span`
   &:hover {
     text-decoration: underline;
   }
+  cursor: pointer;
 `;
 
 export default LandingPage;
