@@ -9,3 +9,5 @@ export { default as Card } from './Card.svg';
 export { default as People } from './People.svg';
 export { default as ArrowLeft } from './ArrowLeft.svg';
 export { default as ArrowRight } from './ArrowRight.svg';
+export { default as Arrow } from './Arrow.svg';
+export { default as DefaultProfile } from './defaultProfile.svg';
