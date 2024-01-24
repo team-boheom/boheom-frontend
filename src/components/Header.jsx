@@ -6,7 +6,7 @@ import SearchInput from './SearchInput';
 const Header = () => {
   return (
     <Wrapper>
-      <Link to="/">
+      <Link to="/main">
         <Boheom width="88" height="25" />
       </Link>
       <SearchInput />
