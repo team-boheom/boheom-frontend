@@ -12,11 +12,6 @@ const fadeIn = keyframes`
   }
 `;
 
-/**
- * @todos state 관리 없애고 미리 렌더링 다 박아논 다음에 css
- * 사용해서 안 끊기고 관리하기
- */
-
 const LandingPage = () => {
   const imageText = { image: `${Logo}`, text: 'Boheom' };
   const navigate = useNavigate();
