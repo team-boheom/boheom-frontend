@@ -1,37 +1,39 @@
 import styled from '@emotion/styled';
-import { useState } from 'react';
+import { useState, forwardRef } from 'react';
 import Eye from '../assets/Eye';
 
-const Input = ({
-  label,
-  width = '100%',
-  height = '48px',
-  type = 'text',
-  ...props
-}) => {
-  const [passwordOpen, setPasswordOpen] = useState(false);
+const Input = forwardRef(
+  (
+    { label, width = '100%', height = '48px', type = 'text', ...props },
+    ref
+  ) => {
+    const [passwordOpen, setPasswordOpen] = useState(false);
 
-  return (
-    <Wrapper>
-      {label && <p className="label">{label}</p>}
-      <InputContainer width={width} height={height}>
-        <input
-          type={type !== 'password' ? type : passwordOpen ? 'text' : 'password'}
-          {...props}
-        />
-        {type === 'password' && (
-          <EyeContainer
-            onClick={() => {
-              setPasswordOpen((prev) => !prev);
-            }}
-          >
-            <Eye state={passwordOpen} />
-          </EyeContainer>
-        )}
-      </InputContainer>
-    </Wrapper>
-  );
-};
+    return (
+      <Wrapper>
+        {label && <p className="label">{label}</p>}
+        <InputContainer width={width} height={height}>
+          <input
+            ref={ref}
+            type={
+              type !== 'password' ? type : passwordOpen ? 'text' : 'password'
+            }
+            {...props}
+          />
+          {type === 'password' && (
+            <EyeContainer
+              onClick={() => {
+                setPasswordOpen((prev) => !prev);
+              }}
+            >
+              <Eye state={passwordOpen} />
+            </EyeContainer>
+          )}
+        </InputContainer>
+      </Wrapper>
+    );
+  }
+);
 
 const Wrapper = styled.div`
   width: ${({ width }) => width};
