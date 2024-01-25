@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
-import { useForm, Controller } from 'react-hook-form';
-
+import { useForm } from 'react-hook-form';
 import { Arrow } from '../assets/index';
 import Layout from '../components/Layout';
 import Header from '../components/Header';
@@ -12,11 +11,10 @@ const CreatePost = () => {
     register,
     handleSubmit,
     formState: { isSubmitting, isSubmitted, errors },
-  } = useForm();
+  } = useForm({ defaultValues: { number: 4 } });
 
   const onSubmit = (data) => {
     console.log(data);
-    console.log(errors);
   };
 
   return (
@@ -32,57 +30,95 @@ const CreatePost = () => {
         </TitleContainer>
         <FormWrapper>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <Input
-              {...register('title', { required: '제목을 작성해 주세요.' })}
-              aria-invalid={
-                isSubmitted ? (errors.title ? 'true' : 'false') : undefined
-              }
-              label="제목"
-              type="text"
-              placeholder="제목 작성하기"
-            />
-            {errors.title && (
-              <small role="alert" className="error">
-                {errors.title.message}
-              </small>
-            )}
-
-            <ContentContainer
-              {...register('content', { required: '내용을 작성해 주세요.' })}
-              aria-invalid={
-                isSubmitted ? (errors.content ? 'true' : 'false') : undefined
-              }
-              placeholder="내용 작성하기"
-              type="text"
-            />
-            {errors.content && (
-              <small role="alert" className="error">
-                {errors.content.message}
-              </small>
-            )}
+            <ErrorWrapper className="titleInput">
+              <Input
+                {...register('title', { required: '제목을 작성해 주세요.' })}
+                aria-invalid={
+                  isSubmitted ? (errors.title ? 'true' : 'false') : undefined
+                }
+                label="제목"
+                type="text"
+                placeholder="제목 작성하기"
+              />
+              {errors.title && (
+                <ErrorText role="alert">{errors.title.message}</ErrorText>
+              )}
+            </ErrorWrapper>
+            <ErrorWrapper className="contentInput">
+              <label>내용</label>
+              <ContentContainer
+                {...register('content', { required: '내용을 작성해 주세요.' })}
+                aria-invalid={
+                  isSubmitted ? (errors.content ? 'true' : 'false') : undefined
+                }
+                placeholder="내용 작성하기"
+                type="text"
+              />
+              {errors.content && (
+                <ErrorText role="alert">{errors.content.message}</ErrorText>
+              )}
+            </ErrorWrapper>
 
             <FormContainer>
               <Input
                 {...register('tag')}
                 label="해시태그"
                 placeholder="#퍼즐 #전략 #카드 #협동"
+                width="564px"
               />
               <Input
-                {...register('members', {
-                  required: '모집인원을 작성해 주세요.',
-                })}
+                {...register('number', { value: 4 })}
                 label="모집인원"
-                placeholder="기본 4인"
+                type="number"
+                width="81px"
+                onChange={(e) => {
+                  console.log(e.target.value);
+                }}
               />
-              {errors.members && (
-                <small role="alert" className="error">
-                  {errors.members.message}
-                </small>
-              )}
-              <Input label="모집일" />
-              <p> ~ </p>
-              <Input label="모집일" />
+
+              <div className="calender">
+                <Input
+                  label="모집일"
+                  type="date"
+                  onChange={(e) => console.log(e.target.value)}
+                  width="179px"
+                  {...register('startDate', {
+                    required: '모집 시작일을 선택해 주세요.',
+                  })}
+                  aria-invalid={
+                    isSubmitted
+                      ? errors.startDate
+                        ? 'true'
+                        : 'false'
+                      : undefined
+                  }
+                />
+                {errors.startDate && (
+                  <ErrorText role="alert">{errors.startDate.message}</ErrorText>
+                )}
+                <p> ~ </p>
+                <Input
+                  label="모집일"
+                  type="date"
+                  onChange={(e) => console.log(e.target.value)}
+                  width="179px"
+                  {...register('endDate', {
+                    required: '모집 마감일을 선택해 주세요.',
+                  })}
+                  aria-invalid={
+                    isSubmitted
+                      ? errors.endDate
+                        ? 'true'
+                        : 'false'
+                      : undefined
+                  }
+                />
+                {errors.endDate && (
+                  <ErrorText role="alert">{errors.endDate.message}</ErrorText>
+                )}
+              </div>
             </FormContainer>
+
             <ButtonContainer>
               <Button
                 text="취소"
@@ -141,13 +177,6 @@ const FormWrapper = styled.div`
     flex-direction: column;
     gap: 50px;
   }
-  > .error {
-    ${({ theme }) => ({
-      fontSize: theme.fontSize.body2,
-      fontWeight: theme.fontWeight.regular,
-      color: theme.color.red,
-    })}
-  }
 `;
 
 const ContentContainer = styled.textarea`
@@ -175,7 +204,34 @@ const ContentContainer = styled.textarea`
 
 const FormContainer = styled.div`
   display: flex;
-  gap: 50px;
+  gap: 49px;
+  > .calender {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+  }
+`;
+
+const ErrorText = styled.small`
+  ${({ theme }) => ({
+    fontSize: theme.fontSize.body2,
+    fontWeight: theme.fontWeight.regular,
+    color: theme.color.red,
+  })}
+`;
+
+const ErrorWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  > label {
+    ${({ theme }) => ({
+      fontSize: theme.fontSize.body2,
+      fontWeight: theme.fontWeight.regular,
+      color: theme.color.gray500,
+    })}
+  }
 `;
 
 const ButtonContainer = styled.div`
