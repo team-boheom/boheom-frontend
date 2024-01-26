@@ -64,7 +64,7 @@ const CreatePost = () => {
                 {...register('tag')}
                 label="해시태그"
                 placeholder="#퍼즐 #전략 #카드 #협동"
-                width="564px"
+                width="100%"
               />
               <Input
                 {...register('number', { value: 4 })}
@@ -77,45 +77,51 @@ const CreatePost = () => {
               />
 
               <div className="calender">
-                <Input
-                  label="모집일"
-                  type="date"
-                  onChange={(e) => console.log(e.target.value)}
-                  width="179px"
-                  {...register('startDate', {
-                    required: '모집 시작일을 선택해 주세요.',
-                  })}
-                  aria-invalid={
-                    isSubmitted
-                      ? errors.startDate
-                        ? 'true'
-                        : 'false'
-                      : undefined
-                  }
-                />
-                {errors.startDate && (
-                  <ErrorText role="alert">{errors.startDate.message}</ErrorText>
-                )}
+                <div>
+                  <Input
+                    label="모집일"
+                    type="date"
+                    onChange={(e) => console.log(e.target.value)}
+                    width="179px"
+                    {...register('startDate', {
+                      required: '모집 시작일을 선택해 주세요.',
+                    })}
+                    aria-invalid={
+                      isSubmitted
+                        ? errors.startDate
+                          ? 'true'
+                          : 'false'
+                        : undefined
+                    }
+                  />
+                  {errors.startDate && (
+                    <ErrorText role="alert">
+                      {errors.startDate.message}
+                    </ErrorText>
+                  )}
+                </div>
                 <p> ~ </p>
-                <Input
-                  label="모집일"
-                  type="date"
-                  onChange={(e) => console.log(e.target.value)}
-                  width="179px"
-                  {...register('endDate', {
-                    required: '모집 마감일을 선택해 주세요.',
-                  })}
-                  aria-invalid={
-                    isSubmitted
-                      ? errors.endDate
-                        ? 'true'
-                        : 'false'
-                      : undefined
-                  }
-                />
-                {errors.endDate && (
-                  <ErrorText role="alert">{errors.endDate.message}</ErrorText>
-                )}
+                <div>
+                  <Input
+                    label="모집일"
+                    type="date"
+                    onChange={(e) => console.log(e.target.value)}
+                    width="179px"
+                    {...register('endDate', {
+                      required: '모집 마감일을 선택해 주세요.',
+                    })}
+                    aria-invalid={
+                      isSubmitted
+                        ? errors.endDate
+                          ? 'true'
+                          : 'false'
+                        : undefined
+                    }
+                  />
+                  {errors.endDate && (
+                    <ErrorText role="alert">{errors.endDate.message}</ErrorText>
+                  )}
+                </div>
               </div>
             </FormContainer>
 
@@ -175,7 +181,7 @@ const FormWrapper = styled.div`
   > form {
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: 32px;
   }
 `;
 
@@ -193,23 +199,31 @@ const ContentContainer = styled.textarea`
   ${({ theme }) => ({
     border: `1px solid ${theme.color.gray100}`,
     backgroundColor: theme.color.gray10,
+    fontSize: theme.fontSize.body1,
   })}
   ::placeholder {
-    ${({ theme }) => ({
-      color: theme.color.gray500,
-      fontSize: theme.fontSize.body1,
-    })}
+    color: ${({ theme }) => theme.color.gray500};
   }
 `;
 
 const FormContainer = styled.div`
+  width: 100%;
   display: flex;
-  gap: 49px;
+  gap: 20px;
+  flex-wrap: wrap;
   > .calender {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 24px;
+    gap: 16px;
+    > div {
+      > :nth-child(1) {
+        margin-bottom: 8px;
+      }
+    }
+  }
+  > :nth-child(1) {
+    flex: 1;
   }
 `;
 
