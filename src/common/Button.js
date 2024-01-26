@@ -1,19 +1,32 @@
 import styled from '@emotion/styled';
 
-const Button = ({ text, onClick, width, color }) => {
+const Button = ({
+  text,
+  onClick,
+  width = '100%',
+  color,
+  backgroundColor,
+  type = 'submit',
+}) => {
   return (
-    <ButtonContainer width={width} color={color} onClick={onClick}>
+    <ButtonContainer
+      width={width}
+      color={color}
+      onClick={onClick}
+      backgroundColor={backgroundColor}
+      type={type}
+    >
       {text}
     </ButtonContainer>
   );
 };
 
 const ButtonContainer = styled.button`
-  background-color: ${({ color }) => color || 'white'};
-  border: none;
+  background-color: ${({ backgroundColor }) => backgroundColor};
+  border: 1px solid #cdcdcd;
   border-radius: 8px;
-  width: ${({ width }) => width || '100%'};
-  color: ${({ color }) => color || 'black'};
+  width: ${({ width }) => width};
+  color: ${({ color }) => color};
   height: 48px;
   ${({ theme }) => ({
     fontWeight: theme.fontWeight.bold,
