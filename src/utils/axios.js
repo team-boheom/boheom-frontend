@@ -16,7 +16,7 @@ instance.interceptors.request.use(
     }
     return returnConfig;
   },
-  (error) => error
+  (error) => Promise.reject(error)
 );
 
 instance.interceptors.response.use(
@@ -40,6 +40,6 @@ instance.interceptors.response.use(
         }, 1000);
       }
     }
-    return error;
+    return Promise.reject(error);
   }
 );
