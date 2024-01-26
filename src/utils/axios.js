@@ -23,10 +23,13 @@ instance.interceptors.response.use(
   (response) => response,
   async (error) => {
     if (axios.isAxiosError(error) && error.response) {
+      const {
+        response: { status, data },
+      } = error;
       if (
-        error.response.status === 403 ||
-        error.response.status === 401 ||
-        error.response.data.message === 'User Not Found'
+        status === 403 ||
+        status === 401 ||
+        data.message === 'User Not Found'
       ) {
         localStorage.removeItem('access_token');
         localStorage.removeItem('refresh_token');
