@@ -16,3 +16,10 @@ export const GetPopularPosts = () => {
     return data.feeds;
   });
 };
+
+export const GetCategoryPosts = (category) => {
+  return useQuery(['GetCategoryPosts', category], async () => {
+    const { data } = await instance.get(`/${router}/${category}`);
+    return data.feeds;
+  });
+};

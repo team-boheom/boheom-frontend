@@ -1,39 +1,68 @@
 import styled from '@emotion/styled';
 import theme from '../../styles/Theme';
 import { Puzzle, Sparkles, Card, People } from '../../assets/index';
+import { GetCategoryPosts } from '../../utils/api/feeds';
+import PostCard from '../../common/PostCard';
 
-const categoryStyle = {
-  puzzle: {
-    category: '#퍼즐',
-    color: theme.color.green100,
-    img: Puzzle,
-  },
-  strategy: {
-    category: '#전략',
-    color: theme.color.lightGreen100,
-    img: Sparkles,
-  },
-  card: {
-    category: '#카드',
-    color: theme.color.yellow100,
-    img: Card,
-  },
-  collaboration: {
-    category: '#협동',
-    color: '#FBE9DC',
-    img: People,
-  },
-};
+const CategoryPosts = () => {
+  const { data: puzzlePosts = [] } = GetCategoryPosts('퍼즐');
+  const { data: strategyPosts = [] } = GetCategoryPosts('전략');
+  const { data: cardPosts = [] } = GetCategoryPosts('카드');
+  const { data: collaborationPosts = [] } = GetCategoryPosts('협동');
 
-const CategoryWrapper = ({ type, children }) => {
+  const categoryName = ['puzzle', 'strategy', 'card', 'collaboration'];
+
+  const categoryStyle = {
+    puzzle: {
+      category: '#퍼즐',
+      color: theme.color.green100,
+      img: Puzzle,
+      list: puzzlePosts,
+    },
+    strategy: {
+      category: '#전략',
+      color: theme.color.lightGreen100,
+      img: Sparkles,
+      list: strategyPosts,
+    },
+    card: {
+      category: '#카드',
+      color: theme.color.yellow100,
+      img: Card,
+      list: cardPosts,
+    },
+    collaboration: {
+      category: '#협동',
+      color: '#FBE9DC',
+      img: People,
+      list: collaborationPosts,
+    },
+  };
+
   return (
-    <Container bgColor={categoryStyle[type].color}>
-      <div className="head">
-        <span className="sub_title">{categoryStyle[type].category}</span>
-        <img src={categoryStyle[type].img} alt={categoryStyle[type].category} />
-      </div>
-      <CardListGrid>{children}</CardListGrid>
-    </Container>
+    <div>
+      {categoryName.map((type) => (
+        <Container bgColor={categoryStyle[type].color}>
+          <div className="head">
+            <span className="sub_title">{categoryStyle[type].category}</span>
+            <img
+              src={categoryStyle[type].img}
+              alt={categoryStyle[type].category}
+            />
+          </div>
+          {categoryStyle[type].list.length !== 0 ? (
+            <CardListGrid>
+              {categoryStyle[type].list.map((item, idx) => {
+                if (idx > 1) return <></>;
+                return <PostCard {...item} />;
+              })}
+            </CardListGrid>
+          ) : (
+            <p>⚠ 아직 뭐가 없어요</p>
+          )}
+        </Container>
+      ))}
+    </div>
   );
 };
 
@@ -56,6 +85,13 @@ const Container = styled.div`
     gap: 4px;
     margin-bottom: 8px;
   }
+  > p {
+    margin-top: 12px;
+    ${({ theme }) => ({
+      color: theme.color.gray500,
+      fontSize: theme.fontSize.body2,
+    })}
+  }
 `;
 
 const CardListGrid = styled.div`
@@ -71,4 +107,4 @@ const CardListGrid = styled.div`
   }
 `;
 
-export default CategoryWrapper;
+export default CategoryPosts;

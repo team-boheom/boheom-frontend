@@ -1,8 +1,11 @@
 import styled from '@emotion/styled';
 import PostCard from '../common/PostCard';
 import Layout from '../components/Layout';
-import CategoryWrapper from '../components/mainPage/CategoryWrapper';
-import { GetPopularPosts, GetRecentPosts } from '../utils/api/feeds';
+import CategoryPosts from '../components/mainPage/CategoryWrapper';
+import {
+  GetPopularPosts,
+  GetRecentPosts
+} from '../utils/api/feeds';
 
 const MainPage = () => {
   const { data: recentPosts = [] } = GetRecentPosts();
@@ -43,12 +46,7 @@ const MainPage = () => {
         </div>
         <Category>
           <p className="title">카테고리 별 게시글</p>
-          <div>
-            <CategoryWrapper type="puzzle">{/*퍼즐 */}</CategoryWrapper>
-            <CategoryWrapper type="strategy">{/*전략 */}</CategoryWrapper>
-            <CategoryWrapper type="card">{/*카드 */}</CategoryWrapper>
-            <CategoryWrapper type="collaboration">{/*협동 */}</CategoryWrapper>
-          </div>
+          <CategoryPosts />
         </Category>
       </AreaLayout>
     </Layout>
