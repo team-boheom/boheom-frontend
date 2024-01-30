@@ -1,90 +1,15 @@
 import styled from '@emotion/styled';
-import Layout from '../components/Layout';
 import PostCard from '../common/PostCard';
+import Layout from '../components/Layout';
 import Pagination from '../components/post/Pagination';
+import useQueryString from '../hooks/useQueryString';
 
 const PostPage = () => {
+  const { qeuryString } = useQueryString({ search: '', page: '1' });
   return (
     <Layout>
       <SearchResults>'{'뱅'}' 검색결과를 찾았어요</SearchResults>
       <CardListGrid>
-        <PostCard
-          tags={['뱅', '모여라']}
-          title={'같이 뱅 하실래요?'}
-          content={
-            '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
-          }
-          view={25}
-          apply_count={1}
-          recruitment={4}
-          id={1}
-        />
-        <PostCard
-          tags={['뱅', '모여라']}
-          title={'같이 뱅 하실래요?'}
-          content={
-            '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
-          }
-          view={25}
-          apply_count={1}
-          recruitment={4}
-          id={1}
-        />
-        <PostCard
-          tags={['뱅', '모여라']}
-          title={'같이 뱅 하실래요?'}
-          content={
-            '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
-          }
-          view={25}
-          apply_count={1}
-          recruitment={4}
-          id={1}
-        />
-        <PostCard
-          tags={['뱅', '모여라']}
-          title={'같이 뱅 하실래요?'}
-          content={
-            '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
-          }
-          view={25}
-          apply_count={1}
-          recruitment={4}
-          id={1}
-        />
-        <PostCard
-          tags={['뱅', '모여라']}
-          title={'같이 뱅 하실래요?'}
-          content={
-            '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
-          }
-          view={25}
-          apply_count={1}
-          recruitment={4}
-          id={1}
-        />
-        <PostCard
-          tags={['뱅', '모여라']}
-          title={'같이 뱅 하실래요?'}
-          content={
-            '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
-          }
-          view={25}
-          apply_count={1}
-          recruitment={4}
-          id={1}
-        />
-        <PostCard
-          tags={['뱅', '모여라']}
-          title={'같이 뱅 하실래요?'}
-          content={
-            '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
-          }
-          view={25}
-          apply_count={1}
-          recruitment={4}
-          id={1}
-        />
         <PostCard
           tags={['뱅', '모여라']}
           title={'같이 뱅 하실래요?'}
