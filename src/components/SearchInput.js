@@ -1,10 +1,24 @@
 import styled from '@emotion/styled';
+import { useForm } from 'react-hook-form';
 import { Search } from '../assets/index';
+import { useNavigate } from 'react-router';
 
 const SearchInput = () => {
+  const navigate = useNavigate();
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = ({ search }) => {
+    navigate(`/post?search=${search}`);
+  };
+
   return (
-    <Container>
-      <input type="text" placeholder="보드게임 모험을 찾아서" />
+    <Container onSubmit={handleSubmit(onSubmit)}>
+      <input
+        {...register('search')}
+        type="text"
+        placeholder="보드게임 모험을 찾아서"
+        autocomplete="off"
+      />
       <div>
         <img src={Search} />
       </div>
@@ -12,7 +26,7 @@ const SearchInput = () => {
   );
 };
 
-const Container = styled.div`
+const Container = styled.form`
   width: 660px;
   height: 40px;
   background-color: ${({ theme }) => theme.color.white};

@@ -19,13 +19,12 @@ const useQueryString = (initialState) => {
       .map(([key, value]) => value && `${key}=${value}`)
       .filter((item) => item)
       .join('&');
-    navigate(`${location.pathname}?${queryString}`);
+    navigate(`/post?${queryString}`);
   };
 
   useEffect(() => {
     const newValue = Object.keys(initialState).reduce((acc, key) => {
       acc[key] = getQueryString(key) || initialState[key];
-      console.log(acc);
       return acc;
     }, initialState);
     setQueryState(newValue);
