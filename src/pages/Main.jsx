@@ -1,9 +1,16 @@
-import Layout from '../components/Layout';
 import styled from '@emotion/styled';
 import PostCard from '../common/PostCard';
-import CategoryWrapper from '../components/mainPage/CategoryWrapper';
+import Layout from '../components/Layout';
+import CategoryPosts from '../components/mainPage/CategoryWrapper';
+import {
+  GetPopularPosts,
+  GetRecentPosts
+} from '../utils/api/feeds';
 
 const MainPage = () => {
+  const { data: recentPosts = [] } = GetRecentPosts();
+  const { data: popularPosts = [] } = GetPopularPosts();
+
   return (
     <Layout marginX="6.5vw">
       <Title>
@@ -19,250 +26,27 @@ const MainPage = () => {
           <div>
             <p className="title">최근에 올라온 게시글</p>
             <CardListGrid>
-              {/* 퍼블리싱용 더미 값들 */}
-              <PostCard
-                tags={['뱅', '모여라']}
-                title={'같이 뱅 하실래요?'}
-                content={
-                  '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
-                }
-                view={25}
-                apply_count={1}
-                recruitment={4}
-                id={1}
-              />
-              <PostCard
-                tags={['뱅', '모여라']}
-                title={'같이 뱅 하실래요?'}
-                content={
-                  '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
-                }
-                view={25}
-                apply_count={1}
-                recruitment={4}
-                id={1}
-              />
-              <PostCard
-                tags={['뱅', '모여라']}
-                title={'같이 뱅 하실래요?'}
-                content={
-                  '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
-                }
-                view={25}
-                apply_count={1}
-                recruitment={4}
-                id={1}
-              />
-              <PostCard
-                tags={['뱅', '모여라']}
-                title={'같이 뱅 하실래요?'}
-                content={
-                  '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
-                }
-                view={25}
-                apply_count={1}
-                recruitment={4}
-                id={1}
-              />
-              <PostCard
-                tags={['뱅', '모여라']}
-                title={'같이 뱅 하실래요?'}
-                content={
-                  '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
-                }
-                view={25}
-                apply_count={1}
-                recruitment={4}
-                id={1}
-              />
-              <PostCard
-                tags={['뱅', '모여라']}
-                title={'같이 뱅 하실래요?'}
-                content={
-                  '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
-                }
-                view={25}
-                apply_count={1}
-                recruitment={4}
-                id={1}
-              />
+              {recentPosts.map((item, idx) => {
+                if (idx > 5) return <></>;
+                return <PostCard {...item} />;
+              })}
             </CardListGrid>
           </div>
           <div>
             <p className="title">가장 인기있는 게시글</p>
             <CardListGrid>
-              <PostCard
-                tags={['뱅', '모여라']}
-                title={'같이 뱅 하실래요?'}
-                content={
-                  '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
-                }
-                view={25}
-                apply_count={1}
-                recruitment={4}
-                id={1}
-                ranking={1}
-              />
-              <PostCard
-                tags={['뱅', '모여라']}
-                title={'같이 뱅 하실래요?'}
-                content={
-                  '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
-                }
-                view={25}
-                apply_count={1}
-                recruitment={4}
-                id={1}
-                ranking={2}
-              />
-              <PostCard
-                tags={['뱅', '모여라']}
-                title={'같이 뱅 하실래요?'}
-                content={
-                  '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
-                }
-                view={25}
-                apply_count={1}
-                recruitment={4}
-                id={1}
-                ranking={3}
-              />
-              <PostCard
-                tags={['뱅', '모여라']}
-                title={'같이 뱅 하실래요?'}
-                content={
-                  '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
-                }
-                view={25}
-                apply_count={1}
-                recruitment={4}
-                id={1}
-              />
-              <PostCard
-                tags={['뱅', '모여라']}
-                title={'같이 뱅 하실래요?'}
-                content={
-                  '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
-                }
-                view={25}
-                apply_count={1}
-                recruitment={4}
-                id={1}
-              />
-              <PostCard
-                tags={['뱅', '모여라']}
-                title={'같이 뱅 하실래요?'}
-                content={
-                  '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
-                }
-                view={25}
-                apply_count={1}
-                recruitment={4}
-                id={1}
-              />
+              {popularPosts.map((item, idx) => {
+                if (idx > 5) return <></>;
+                return (
+                  <PostCard {...item} ranking={idx < 3 ? idx + 1 : null} />
+                );
+              })}
             </CardListGrid>
           </div>
         </div>
         <Category>
           <p className="title">카테고리 별 게시글</p>
-          <div>
-            <CategoryWrapper type="puzzle">
-              <PostCard
-                tags={['뱅', '모여라']}
-                title={'같이 뱅 하실래요?'}
-                content={
-                  '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
-                }
-                view={25}
-                apply_count={1}
-                recruitment={4}
-                id={1}
-              />
-              <PostCard
-                tags={['뱅', '모여라']}
-                title={'같이 뱅 하실래요?'}
-                content={
-                  '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
-                }
-                view={25}
-                apply_count={1}
-                recruitment={4}
-                id={1}
-              />
-            </CategoryWrapper>
-            <CategoryWrapper type="strategy">
-              <PostCard
-                tags={['뱅', '모여라']}
-                title={'같이 뱅 하실래요?'}
-                content={
-                  '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
-                }
-                view={25}
-                apply_count={1}
-                recruitment={4}
-                id={1}
-              />
-              <PostCard
-                tags={['뱅', '모여라']}
-                title={'같이 뱅 하실래요?'}
-                content={
-                  '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
-                }
-                view={25}
-                apply_count={1}
-                recruitment={4}
-                id={1}
-              />
-            </CategoryWrapper>
-            <CategoryWrapper type="card">
-              <PostCard
-                tags={['뱅', '모여라']}
-                title={'같이 뱅 하실래요?'}
-                content={
-                  '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
-                }
-                view={25}
-                apply_count={1}
-                recruitment={4}
-                id={1}
-              />
-              <PostCard
-                tags={['뱅', '모여라']}
-                title={'같이 뱅 하실래요?'}
-                content={
-                  '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
-                }
-                view={25}
-                apply_count={1}
-                recruitment={4}
-                id={1}
-              />
-            </CategoryWrapper>
-            <CategoryWrapper type="collaboration">
-              <PostCard
-                tags={['뱅', '모여라']}
-                title={'같이 뱅 하실래요?'}
-                content={
-                  '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
-                }
-                view={25}
-                apply_count={1}
-                recruitment={4}
-                id={1}
-              />
-              <PostCard
-                tags={['뱅', '모여라']}
-                title={'같이 뱅 하실래요?'}
-                content={
-                  '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
-                }
-                view={25}
-                apply_count={1}
-                recruitment={4}
-                id={1}
-              />
-            </CategoryWrapper>
-          </div>
+          <CategoryPosts />
         </Category>
       </AreaLayout>
     </Layout>

@@ -17,7 +17,7 @@ const PostCard = ({
     <Container to={`/post/${id}`}>
       <div>
         {tags.map((item, idx) => (
-          <Tag key={idx}>#{item}</Tag>
+          <Tag key={idx}>{item}</Tag>
         ))}
       </div>
       <TextContents>
