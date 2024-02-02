@@ -3,14 +3,28 @@ import styled from '@emotion/styled';
 import { Logo, Boheom } from '../assets/index.js';
 import Input from '../common/Input';
 import Button from '../common/Button';
+import { useMutation } from 'react-query';
+import { userLogin } from '../utils/api/auth';
+import { toast } from 'react-hot-toast';
+import { setToken } from '../utils/functions/TokenManager';
+import { LoginInputType } from '../models/Login';
 
-const Login = () => {
+export const useLogin = () => {
   const navigate = useNavigate();
 
-  const handleLoginClick = () => {
-    navigate('/');
-  };
+  return useMutation(() => userLogin(LoginInputType), {
+    onError: (error) => {
+      toast.error(`${error.response?.data}`, { duration: 1000 });
+    },
+    onSuccess: ({ data }) => {
+      toast.success('로그인에 성공했습니다.', { duration: 1000 });
+      setToken(data.accessToken, data.refreshToken);
+      navigate('/main');
+    },
+  });
+};
 
+const Login = () => {
   return (
     <Wrapper>
       <LogoBox>
@@ -31,12 +45,7 @@ const Login = () => {
           height="48px"
           type="password"
         />
-        <Button
-          width="506px"
-          text="로그인"
-          color="green"
-          onClick={handleLoginClick}
-        />
+        <Button width="506px" text="로그인" color="green" onClick={useLogin} />
       </Content>
       <StyledLink to="/signup">회원가입</StyledLink>
     </Wrapper>
