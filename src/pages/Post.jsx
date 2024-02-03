@@ -1,30 +1,41 @@
 import styled from '@emotion/styled';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router';
 import PostCard from '../common/PostCard';
 import Layout from '../components/Layout';
 import Pagination from '../components/post/Pagination';
-import useQueryString from '../hooks/useQueryString';
+import { SearchPosts } from '../utils/feeds';
 
 const PostPage = () => {
-  const { qeuryString } = useQueryString({ search: '', page: '1' });
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const searchQueryString = searchParams.get('search');
+  const pageQueryString = searchParams.get('page');
+  const [search, setSearch] = useState(searchQueryString);
+
+  const { data: posts } = SearchPosts(search, pageQueryString);
+
+  useEffect(() => {
+    setSearch(searchQueryString);
+  }, [searchQueryString]);
+
   return (
     <Layout>
-      <SearchResults>'{'뱅'}' 검색결과를 찾았어요</SearchResults>
+      <SearchResults>
+        {posts && posts?.feeds.length !== 0 ? (
+          <>'{search}' 검색결과를 찾았어요</>
+        ) : (
+          <>검색 결과가 없어요..</>
+        )}
+      </SearchResults>
       <CardListGrid>
-        <PostCard
-          tags={['뱅', '모여라']}
-          title={'같이 뱅 하실래요?'}
-          content={
-            '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
-          }
-          view={25}
-          apply_count={1}
-          recruitment={4}
-          id={1}
-        />
+        {posts?.feeds ? (
+          posts.feeds.map(({ ...item }) => <PostCard {...item} />)
+        ) : (
+          <></>
+        )}
       </CardListGrid>
-      <div>
-        <Pagination total_page={3} />
-      </div>
+      <Pagination total_page={posts?.total_page} />
     </Layout>
   );
 };
@@ -45,12 +56,6 @@ const CardListGrid = styled.div`
   grid-column-gap: 20px;
   grid-row-gap: 16px;
   margin-top: 40px;
-  + div {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 60px;
-  }
 `;
 
 export default PostPage;

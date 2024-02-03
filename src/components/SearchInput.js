@@ -1,25 +1,36 @@
 import styled from '@emotion/styled';
-import { useForm } from 'react-hook-form';
+import { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router';
 import { Search } from '../assets/index';
-import { useNavigate } from 'react-router';
 
 const SearchInput = () => {
+  const location = useLocation();
   const navigate = useNavigate();
-  const { register, handleSubmit } = useForm();
+  const searchParams = new URLSearchParams(location.search);
+  const queryString = searchParams.get('search');
+  const [search, setSearch] = useState(queryString);
 
-  const onSubmit = ({ search }) => {
-    navigate(`/post?search=${search}`);
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (search !== '') {
+      navigate(`/post?search=${search}&page=1`);
+    }
   };
 
   return (
-    <Container onSubmit={handleSubmit(onSubmit)}>
+    <Container onSubmit={onSubmit}>
       <input
-        {...register('search')}
+        // {...register('search')}
+        name="search"
         type="text"
         placeholder="보드게임 모험을 찾아서"
         autocomplete="off"
+        value={search}
+        onChange={(e) => {
+          setSearch(e.target.value);
+        }}
       />
-      <div>
+      <div onClick={onSubmit}>
         <img src={Search} />
       </div>
     </Container>

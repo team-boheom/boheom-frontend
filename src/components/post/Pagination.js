@@ -1,67 +1,84 @@
 import styled from '@emotion/styled';
-import { ArrowLeft, ArrowRight } from '../../assets';
-import useQueryString from '../../hooks/useQueryString';
 import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router';
+import { ArrowLeft, ArrowRight } from '../../assets';
 
 const Pagination = ({ total_page }) => {
   const arrayOfPages = Array(total_page).fill(0);
-  const { queryState, setQueryString } = useQueryString({
-    search: '',
-    page: '1',
-  });
-  const [pageNum, setPageNum] = useState(queryState.page);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const searchParams = new URLSearchParams(location.search);
+  const queryString = searchParams.get('page');
+  const [pageNum, setPageNum] = useState(queryString || 1);
+
+  console.log(location.search.split('&page=')[0]);
 
   useEffect(() => {
-    setQueryString('page', pageNum);
+    navigate(
+      `${location.pathname}${location.search.split('&page')[0]}&page=${pageNum}`
+    );
   }, [pageNum]);
 
   return (
     <Wrapper>
-      <img
-        src={ArrowLeft}
-        alt="이전"
-        onClick={() => {
-          if (pageNum > 1) setPageNum((prev) => (Number(prev) - 1).toString());
-        }}
-      />
-      {arrayOfPages.map((_, idx) => (
-        <PageNumber
-          onClick={() => {
-            setPageNum((idx + 1).toString());
-          }}
-        >
-          <p className={pageNum === (idx + 1).toString() ? 'select' : ''}>
-            {idx + 1}
-          </p>
-        </PageNumber>
-      ))}
-      <img
-        src={ArrowRight}
-        alt="다음"
-        onClick={() => {
-          if (pageNum < total_page)
-            setPageNum((prev) => (Number(prev) + 1).toString());
-        }}
-      />
+      {total_page ? (
+        <>
+          <img
+            src={ArrowLeft}
+            alt="이전"
+            onClick={() => {
+              if (pageNum > 1)
+                setPageNum((prev) => (Number(prev) - 1).toString());
+            }}
+          />
+          {arrayOfPages.map((_, idx) => (
+            <PageNumber
+              onClick={() => {
+                setPageNum((idx + 1).toString());
+              }}
+            >
+              <p className={pageNum === (idx + 1).toString() ? 'select' : ''}>
+                {idx + 1}
+              </p>
+            </PageNumber>
+          ))}
+          <img
+            src={ArrowRight}
+            alt="다음"
+            onClick={() => {
+              if (pageNum < total_page)
+                setPageNum((prev) => (Number(prev) + 1).toString());
+            }}
+          />
+        </>
+      ) : (
+        <></>
+      )}
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
+  width: 100%;
   display: flex;
+  justify-content: center;
   gap: 12px;
+  margin-top: 60px;
   > img,
   div {
     cursor: pointer;
   }
 `;
 
-const PageNumber = styled.div`
+const PageNumber = styled.button`
   width: 20px;
   height: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
   p {
     ${({ theme }) => ({
       fontSize: theme.fontSize.body1,
