@@ -13,7 +13,7 @@ const PostPage = () => {
   const pageQueryString = searchParams.get('page');
   const [search, setSearch] = useState(searchQueryString);
 
-  const { data: posts } = SearchPosts(search, pageQueryString);
+  const { data: posts } = SearchPosts(search, pageQueryString-1);
 
   useEffect(() => {
     setSearch(searchQueryString);
