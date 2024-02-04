@@ -1,14 +1,25 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { Logo, Boheom } from '../assets/index.js';
 import Input from '../common/Input';
 import Button from '../common/Button';
+import { useForm } from 'react-hook-form';
+import { useLogin } from '../utils/api/auth.js';
 
 const Login = () => {
-  const navigate = useNavigate();
+  const { mutate: PostUserLogin } = useLogin();
+  const {
+    register,
+    handleSubmit,
+    formState: { isSubmitting, errors },
+  } = useForm();
 
-  const handleLoginClick = () => {
-    navigate('/');
+  const onSubmit = (data) => {
+    const { account_id, password } = data;
+    PostUserLogin({
+      account_id,
+      password,
+    });
   };
 
   return (
@@ -17,27 +28,46 @@ const Login = () => {
         <StyledLogo src={Logo} alt="로고" />
         <StyledBoheom src={Boheom} alt="보험" />
       </LogoBox>
-      <Content>
-        <Input
-          label="아이디"
-          placeholder="아이디를 입력하세요."
-          width="506px"
-          height="48px"
-        />
-        <Input
-          label="비밀번호"
-          placeholder="비밀번호를 입력하세요."
-          width="506px"
-          height="48px"
-          type="password"
-        />
-        <Button
-          width="506px"
-          text="로그인"
-          color="green"
-          onClick={handleLoginClick}
-        />
-      </Content>
+      <form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
+        <Content>
+          <div className="error">
+            <Input
+              {...register('account_id', {
+                required: '아이디를 작성해 주세요.',
+              })}
+              label="아이디"
+              placeholder="아이디를 입력하세요."
+              width="506px"
+              height="48px"
+            />
+            {errors.account_id && (
+              <ErrorText>{errors.account_id.message}</ErrorText>
+            )}
+          </div>
+          <div>
+            <Input
+              {...register('password', {
+                required: '비밀번호를 입력해 주세요.',
+              })}
+              label="비밀번호"
+              placeholder="비밀번호를 입력하세요."
+              width="506px"
+              height="48px"
+              type="password"
+            />
+            {errors.password && (
+              <ErrorText>{errors.password.message}</ErrorText>
+            )}
+          </div>
+          <Button
+            width="506px"
+            text="로그인"
+            backgroundColor="#44EA51"
+            color="#ffffff"
+            disabled={isSubmitting}
+          />
+        </Content>
+      </form>
       <StyledLink to="/signup">회원가입</StyledLink>
     </Wrapper>
   );
@@ -73,12 +103,18 @@ const StyledBoheom = styled.img`
 `;
 
 const Content = styled.div`
+  width: 100%;
   height: 292px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 50px;
   align-items: center;
-  margin-top: 47px;
+  margin-top: 50px;
+  > .error {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
 `;
 
 const StyledLink = styled(Link)`
@@ -91,6 +127,15 @@ const StyledLink = styled(Link)`
     fontWeight: theme.fontWeight.regular,
     fontSize: theme.fontSize.body2,
   })}
+`;
+
+const ErrorText = styled.p`
+  ${({ theme }) => ({
+    fontSize: theme.fontSize.body2,
+    fontWeight: theme.fontWeight.regular,
+    color: theme.color.red,
+  })}
+  margin-top: 5px;
 `;
 
 export default Login;
