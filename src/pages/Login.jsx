@@ -33,7 +33,7 @@ const Login = () => {
           <div className="error">
             <Input
               {...register('account_id', {
-                required: '아이디를 작성해 주세요.',
+                required: '아이디는 필수 입니다.',
               })}
               label="아이디"
               placeholder="아이디를 입력하세요."
@@ -47,7 +47,7 @@ const Login = () => {
           <div>
             <Input
               {...register('password', {
-                required: '비밀번호를 입력해 주세요.',
+                required: '비밀번호는 필수 입니다.',
               })}
               label="비밀번호"
               placeholder="비밀번호를 입력하세요."
@@ -66,9 +66,9 @@ const Login = () => {
             color="#ffffff"
             disabled={isSubmitting}
           />
+          <StyledLink to="/signup">회원가입</StyledLink>
         </Content>
       </form>
-      <StyledLink to="/signup">회원가입</StyledLink>
     </Wrapper>
   );
 };
