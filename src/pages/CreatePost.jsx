@@ -10,7 +10,7 @@ const CreatePost = () => {
   const {
     register,
     handleSubmit,
-    formState: { isSubmitting, isSubmitted, errors },
+    formState: { isSubmitting, errors },
   } = useForm({ defaultValues: { number: 4 } });
 
   const onSubmit = (data) => {
@@ -33,9 +33,6 @@ const CreatePost = () => {
             <ErrorWrapper className="titleInput">
               <Input
                 {...register('title', { required: '제목을 작성해 주세요.' })}
-                aria-invalid={
-                  isSubmitted ? (errors.title ? 'true' : 'false') : undefined
-                }
                 label="제목"
                 type="text"
                 placeholder="제목 작성하기"
@@ -48,9 +45,6 @@ const CreatePost = () => {
               <label>내용</label>
               <ContentContainer
                 {...register('content', { required: '내용을 작성해 주세요.' })}
-                aria-invalid={
-                  isSubmitted ? (errors.content ? 'true' : 'false') : undefined
-                }
                 placeholder="내용 작성하기"
                 type="text"
               />
@@ -86,13 +80,6 @@ const CreatePost = () => {
                     {...register('startDate', {
                       required: '모집 시작일을 선택해 주세요.',
                     })}
-                    aria-invalid={
-                      isSubmitted
-                        ? errors.startDate
-                          ? 'true'
-                          : 'false'
-                        : undefined
-                    }
                   />
                   {errors.startDate && (
                     <ErrorText role="alert">
@@ -110,13 +97,6 @@ const CreatePost = () => {
                     {...register('endDate', {
                       required: '모집 마감일을 선택해 주세요.',
                     })}
-                    aria-invalid={
-                      isSubmitted
-                        ? errors.endDate
-                          ? 'true'
-                          : 'false'
-                        : undefined
-                    }
                   />
                   {errors.endDate && (
                     <ErrorText role="alert">{errors.endDate.message}</ErrorText>
