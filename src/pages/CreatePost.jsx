@@ -17,7 +17,8 @@ const CreatePost = () => {
   } = useForm({ defaultValues: { recruitment: 4 } });
 
   const onSubmit = (data) => {
-    const tag = data.tag.match(/#[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|\w]+/g);
+    const regeax = /#[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|\w);]+/g;
+    const tag = data.tag.match(regeax);
     const { title, content, recruitment, start_day, end_day } = data;
     PostFeeds({
       tag,
