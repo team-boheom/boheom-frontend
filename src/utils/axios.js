@@ -34,7 +34,7 @@ instance.interceptors.response.use(
         localStorage.removeItem('access_token');
         localStorage.removeItem('refresh_token');
 
-        toast.error('로그인이 만료되었습니다. 다시 로그인해주세요.');
+        toast.error('로그인이 만료됐어요. 다시 로그인 해주세요.');
 
         const goToLogin = setTimeout(() => {
           console.log('이동');

@@ -2,8 +2,15 @@ import { Link } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { ReactComponent as Boheom } from '../assets/Boheom.svg';
 import SearchInput from './SearchInput';
+import { removeToken } from '../utils/Token';
+import toast from 'react-hot-toast';
 
 const Header = () => {
+  const handleLogout = () => {
+    removeToken();
+    toast.success('로그아웃에 성공했습니다.');
+  };
+
   return (
     <Wrapper>
       <Link to="/main">
@@ -13,7 +20,9 @@ const Header = () => {
       <Content>
         <StyledLink to="/CreatePost">글 등록하기</StyledLink>
         <StyledLink to="/mypage">마이페이지</StyledLink>
-        <StyledLink>로그아웃</StyledLink>
+        <StyledLink onClick={handleLogout} to="/login">
+          로그아웃
+        </StyledLink>
       </Content>
     </Wrapper>
   );
