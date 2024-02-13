@@ -3,18 +3,31 @@ import { useForm } from 'react-hook-form';
 import { Arrow } from '../assets/index';
 import Layout from '../components/Layout';
 import Header from '../components/Header';
-import Input from '../common/Input';
 import Button from '../common/Button';
+import PostForm from '../components/post/PostForm';
+import ContentForm from '../components/post/ContentForm';
+import { useFeeds } from '../utils/api/feeds';
 
 const CreatePost = () => {
+  const { mutate: PostFeeds } = useFeeds();
   const {
     register,
     handleSubmit,
     formState: { isSubmitting, errors },
-  } = useForm({ defaultValues: { number: 4 } });
+  } = useForm({ defaultValues: { recruitment: 4 } });
 
   const onSubmit = (data) => {
-    console.log(data);
+    const regeax = /#[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|\w);]+/g;
+    const tag = data.tag.match(regeax);
+    const { title, content, recruitment, start_day, end_day } = data;
+    PostFeeds({
+      tag,
+      title,
+      content,
+      recruitment,
+      start_day,
+      end_day,
+    });
   };
 
   return (
@@ -30,81 +43,8 @@ const CreatePost = () => {
         </TitleContainer>
         <FormWrapper>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <ErrorWrapper className="titleInput">
-              <Input
-                {...register('title', { required: '제목을 작성해 주세요.' })}
-                label="제목"
-                type="text"
-                placeholder="제목 작성하기"
-              />
-              {errors.title && (
-                <ErrorText role="alert">{errors.title.message}</ErrorText>
-              )}
-            </ErrorWrapper>
-            <ErrorWrapper className="contentInput">
-              <label>내용</label>
-              <ContentContainer
-                {...register('content', { required: '내용을 작성해 주세요.' })}
-                placeholder="내용 작성하기"
-                type="text"
-              />
-              {errors.content && (
-                <ErrorText role="alert">{errors.content.message}</ErrorText>
-              )}
-            </ErrorWrapper>
-
-            <FormContainer>
-              <Input
-                {...register('tag')}
-                label="해시태그"
-                placeholder="#퍼즐 #전략 #카드 #협동"
-                width="100%"
-              />
-              <Input
-                {...register('number', { value: 4 })}
-                label="모집인원"
-                type="number"
-                width="81px"
-                onChange={(e) => {
-                  console.log(e.target.value);
-                }}
-              />
-
-              <div className="calender">
-                <div>
-                  <Input
-                    label="모집일"
-                    type="date"
-                    onChange={(e) => console.log(e.target.value)}
-                    width="179px"
-                    {...register('startDate', {
-                      required: '모집 시작일을 선택해 주세요.',
-                    })}
-                  />
-                  {errors.startDate && (
-                    <ErrorText role="alert">
-                      {errors.startDate.message}
-                    </ErrorText>
-                  )}
-                </div>
-                <p> ~ </p>
-                <div>
-                  <Input
-                    label="모집일"
-                    type="date"
-                    onChange={(e) => console.log(e.target.value)}
-                    width="179px"
-                    {...register('endDate', {
-                      required: '모집 마감일을 선택해 주세요.',
-                    })}
-                  />
-                  {errors.endDate && (
-                    <ErrorText role="alert">{errors.endDate.message}</ErrorText>
-                  )}
-                </div>
-              </div>
-            </FormContainer>
-
+            <ContentForm register={register} errors={errors} />
+            <PostForm register={register} errors={errors} />
             <ButtonContainer>
               <Button
                 text="취소"
@@ -162,69 +102,6 @@ const FormWrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 32px;
-  }
-`;
-
-const ContentContainer = styled.textarea`
-  border-radius: 8px;
-  padding: 20px 20px;
-  outline: none;
-  resize: none;
-  line-height: 1;
-  border: none;
-  background: none;
-  width: 100%;
-  height: 334px;
-  text-align: top;
-  ${({ theme }) => ({
-    border: `1px solid ${theme.color.gray100}`,
-    backgroundColor: theme.color.gray10,
-    fontSize: theme.fontSize.body1,
-  })}
-  ::placeholder {
-    color: ${({ theme }) => theme.color.gray500};
-  }
-`;
-
-const FormContainer = styled.div`
-  width: 100%;
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  > .calender {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    > div {
-      > :nth-child(1) {
-        margin-bottom: 8px;
-      }
-    }
-  }
-  > :nth-child(1) {
-    flex: 1;
-  }
-`;
-
-const ErrorText = styled.small`
-  ${({ theme }) => ({
-    fontSize: theme.fontSize.body2,
-    fontWeight: theme.fontWeight.regular,
-    color: theme.color.red,
-  })}
-`;
-
-const ErrorWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  > label {
-    ${({ theme }) => ({
-      fontSize: theme.fontSize.body2,
-      fontWeight: theme.fontWeight.regular,
-      color: theme.color.gray500,
-    })}
   }
 `;
 
