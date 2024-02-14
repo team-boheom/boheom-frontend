@@ -2,92 +2,62 @@ import styled from '@emotion/styled';
 import Layout from '../components/Layout';
 import { DefaultProfile } from '../assets';
 import PostCard from '../common/PostCard';
+import { GetMyApplied, GetMyPost, GetUserInfo } from '../utils/api/mypage';
+import { HandMouse, FaceEye } from '../assets/index';
 
 const MyPage = () => {
+  const { data: UserInfo } = GetUserInfo();
+  const { data: MyPost = [] } = GetMyPost();
+  const { data: MyApply = [] } = GetMyApplied();
+
   return (
     <Layout>
       <Wrapper>
         <ProfileContainer>
-          <img src={DefaultProfile} alt="프로필사진" />
-          <p>김민지 예쁘다</p>
-          <p>@prettyMinji</p>
+          <img src={UserInfo?.profile || DefaultProfile} alt="프로필사진" />
+          <p>{UserInfo?.nickname || '-'}</p>
+          <p>@{UserInfo?.account_id || '-'}</p>
         </ProfileContainer>
         <AreaLayout>
           <div className="partition">
             <div>
-              <p className="title">최근에 올라온 게시글</p>
+              <p className="title">내가 신청한 게시글</p>
               <CardListGrid>
-                <PostCard
-                  tags={['뱅', '모여라']}
-                  title={'같이 뱅 하실래요?'}
-                  content={
-                    '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
-                  }
-                  view={25}
-                  apply_count={1}
-                  recruitment={4}
-                  id={1}
-                />
-                <PostCard
-                  tags={['뱅', '모여라']}
-                  title={'같이 뱅 하실래요?'}
-                  content={
-                    '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
-                  }
-                  view={25}
-                  apply_count={1}
-                  recruitment={4}
-                  id={1}
-                />
-                <PostCard
-                  tags={['뱅', '모여라']}
-                  title={'같이 뱅 하실래요?'}
-                  content={
-                    '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
-                  }
-                  view={25}
-                  apply_count={1}
-                  recruitment={4}
-                  id={1}
-                />
+                {MyApply.length === 0 ? (
+                  <div>
+                    <img src={HandMouse} alt="" />
+                    <p className="bold">신청한 모집글이 없는 것 같네요..!</p>
+                    <p className="regular">
+                      빨리 원하는 모집글을 찾아 신청해보세요.
+                    </p>
+                  </div>
+                ) : (
+                  MyApply.map((item, idx) => {
+                    if (idx > 5) return <></>;
+                    return <PostCard {...item} />;
+                  })
+                )}
               </CardListGrid>
             </div>
             <div>
               <p className="title">내가 작성한 게시글</p>
               <CardListGrid>
-                <PostCard
-                  tags={['뱅', '모여라']}
-                  title={'같이 뱅 하실래요?'}
-                  content={
-                    '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
-                  }
-                  view={25}
-                  apply_count={1}
-                  recruitment={4}
-                  id={1}
-                />
-                <PostCard
-                  tags={['뱅', '모여라']}
-                  title={'같이 뱅 하실래요?'}
-                  content={
-                    '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
-                  }
-                  view={25}
-                  apply_count={1}
-                  recruitment={4}
-                  id={1}
-                />
-                <PostCard
-                  tags={['뱅', '모여라']}
-                  title={'같이 뱅 하실래요?'}
-                  content={
-                    '같이 뱅 할사람 모여라 블라블라블라블라블라블라블라블라블라블라'
-                  }
-                  view={25}
-                  apply_count={1}
-                  recruitment={4}
-                  id={1}
-                />
+                {MyPost.length === 0 ? (
+                  <div>
+                    <img src={FaceEye} alt="" />
+                    <p className="bold">
+                      이런, 아무런 모집글도 작성하지 않았어요!
+                    </p>
+                    <p className="regular">
+                      모집글을 작성하여 원하는 사람들과 보드게임 해요!
+                    </p>
+                  </div>
+                ) : (
+                  MyPost.map((item, idx) => {
+                    if (idx > 5) return <></>;
+                    return <PostCard {...item} />;
+                  })
+                )}
               </CardListGrid>
             </div>
           </div>
@@ -170,6 +140,27 @@ const CardListGrid = styled.div`
   @media screen and (max-width: 650px) {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
+  }
+  > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    > .bold {
+      ${({ theme }) => ({
+        fontSize: theme.fontSize.body2,
+        fontWeight: theme.fontWeight.bold,
+        color: theme.color.black,
+      })}
+    }
+    > .regular {
+      ${({ theme }) => ({
+        fontSize: theme.fontSize.caption,
+        fontWeight: theme.fontWeight.regular,
+        color: theme.color.black,
+      })}
+    }
   }
 `;
 

@@ -11,3 +11,5 @@ export { default as ArrowLeft } from './ArrowLeft.svg';
 export { default as ArrowRight } from './ArrowRight.svg';
 export { default as Arrow } from './Arrow.svg';
 export { default as DefaultProfile } from './defaultProfile.svg';
+export { default as HandMouse } from './Face with open eyes and hand over mouth.svg';
+export { default as FaceEye } from './Face with peeking eye.svg';

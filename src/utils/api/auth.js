@@ -1,14 +1,16 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { instance } from '../axios';
 import toast from 'react-hot-toast';
 import { setToken } from '../Token';
 import { useNavigate } from 'react-router-dom';
 
+const router = 'users';
+
 export const useLogin = () => {
   const navigate = useNavigate();
   return useMutation(
     async (params) => {
-      return await instance.post('/users/login', params);
+      return await instance.post(`/${router}/login`, params);
     },
     {
       onError: (error) => {
@@ -39,7 +41,7 @@ export const useSignup = () => {
   const navigate = useNavigate();
   return useMutation(
     async (params) => {
-      return await instance.post('/users/signup', params);
+      return await instance.post(`/${router}/signup`, params);
     },
     {
       onError: (error) => {
