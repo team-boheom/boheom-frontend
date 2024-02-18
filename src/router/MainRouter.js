@@ -7,6 +7,7 @@ import Login from '../pages/Login';
 import Signup from '../pages/Signup';
 import OutletRouter from './OutlitRouter';
 import Landing from '../pages/Landing';
+import DetailPost from '../pages/DetailPost';
 
 const MainRouter = () => {
   return (
@@ -16,7 +17,7 @@ const MainRouter = () => {
           <Route path="/main" element={<MainPage />} />
           <Route path="/post">
             <Route path="" element={<PostPage />} />
-            <Route path=":id" element={<PostPage />} />
+            <Route path=":id" element={<DetailPost />} />
           </Route>
           <Route path="/CreatePost" element={<CreatePostPage />} />
           <Route path="/mypage" element={<MyPage />} />
