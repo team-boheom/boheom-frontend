@@ -4,7 +4,7 @@ import { useLocation } from 'react-router';
 import PostCard from '../common/PostCard';
 import Layout from '../components/Layout';
 import Pagination from '../components/post/Pagination';
-import { SearchPosts } from '../utils/feeds';
+import { SearchPosts } from '../utils/api/feeds';
 
 const PostPage = () => {
   const location = useLocation();
@@ -13,7 +13,7 @@ const PostPage = () => {
   const pageQueryString = searchParams.get('page');
   const [search, setSearch] = useState(searchQueryString);
 
-  const { data: posts } = SearchPosts(search, pageQueryString-1);
+  const { data: posts } = SearchPosts(search, pageQueryString - 1);
 
   useEffect(() => {
     setSearch(searchQueryString);
