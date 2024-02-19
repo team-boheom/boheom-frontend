@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import Layout from '../components/Layout';
 import { DefaultProfile } from '../assets';
 import PostCard from '../common/PostCard';
-import { GetMyApplied, GetMyPost, GetUserInfo } from '../utils/api/mypage';
+import { GetMyApplied, GetMyPost, GetUserInfo } from '../utils/api/feeds';
 import { HandMouse, FaceEye } from '../assets/index';
 
 const MyPage = () => {

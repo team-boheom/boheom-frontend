@@ -43,3 +43,41 @@ export const useFeeds = () => {
     }
   );
 };
+
+export const SearchPosts = (keyword, page = 0) => {
+  return useQuery(['SearchPosts', keyword, page], async () => {
+    const { data } = await instance.get(
+      `/${router}/search/${keyword}?page=${page}&size=16`
+    );
+    return data;
+  });
+};
+
+export const GetUserInfo = () => {
+  return useQuery(['GetUserInfo'], async () => {
+    const { data } = await instance.get(`/users`);
+    return data;
+  });
+};
+
+/***
+ * @returns 신청한 게시글 조회
+ */
+
+export const GetMyApplied = () => {
+  return useQuery(['GetMyApplied'], async () => {
+    const { data } = await instance.get(`/${router}/applied`);
+    return data.feeds;
+  });
+};
+
+/**
+ * @returns 작성한 게시글 조회
+ */
+
+export const GetMyPost = () => {
+  return useQuery(['GetMyPost'], async () => {
+    const { data } = await instance.get(`/${router}/mine`);
+    return data.feeds;
+  });
+};
