@@ -69,8 +69,8 @@ const MyPage = () => {
 
 const Wrapper = styled.div`
   width: 950px;
-  height: 820px;
-  border-radius: 8px;
+  height: 840px;
+  border-radius: 12px;
   box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.05);
   margin: auto;
 `;
