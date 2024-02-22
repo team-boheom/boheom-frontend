@@ -2,6 +2,8 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { instance } from '../axios';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { GetPostId } from '../../atom';
 
 const router = 'feeds';
 
@@ -80,4 +82,38 @@ export const GetMyPost = () => {
     const { data } = await instance.get(`/${router}/mine`);
     return data.feeds;
   });
+};
+
+/**
+ * @returns 상세 게시글 조회
+ */
+
+export const GetDetailPost = () => {
+  const feedId = useRecoilValue(GetPostId);
+  return useQuery(['GetDetailPost'], async () => {
+    const { data } = await instance.get(`/${router}/details/${feedId}`);
+    const arrData = [data];
+    return arrData;
+  });
+};
+
+/**
+ * @returns 게시글 신청
+ */
+
+export const useApplyPost = () => {
+  const feedId = useRecoilValue(GetPostId);
+  return useMutation(
+    async () => {
+      return await instance.post(`/${router}/${feedId}`);
+    },
+    {
+      onError: () => {
+        toast.error('신청에 실패했습니다.');
+      },
+      onSuccess: () => {
+        toast.success('신청하였습니다.');
+      },
+    }
+  );
 };
