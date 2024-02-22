@@ -2,6 +2,10 @@ import styled from '@emotion/styled';
 import { Person, View } from '../assets';
 import { Link } from 'react-router-dom';
 import Medal from '../assets/Medal';
+import { useRecoilState } from 'recoil';
+import { GetPostId } from '../atom';
+import DetailsPosts from '../pages/DetailPost';
+import { GetDetailPost } from '../utils/api/feeds';
 
 const PostCard = ({
   tags,
@@ -13,39 +17,44 @@ const PostCard = ({
   id,
   ranking,
 }) => {
+  const [postId, setPostId] = useRecoilState(GetPostId);
+  // const { data: DetailPost = {} } = GetDetailPost();
+  // const DetailPosts = Array.isArray(DetailPost) ? DetailPost : [DetailPost];
   return (
-    <Container to={`/post/${id}`}>
-      <div>
-        {tags.map((item, idx) => (
-          <Tag key={idx}>{item}</Tag>
-        ))}
-      </div>
-      <TextContents>
-        <div className="title_">
-          <p>{title}</p>
-        </div>
-        <div className="main_text">
-          <p>{content}</p>
-        </div>
-      </TextContents>
-      <EtcInfo>
+    <>
+      <Container to={`/post/${id}`} onClick={() => setPostId(id)}>
         <div>
-          <img src={View} alt="조횟수" />
-          <p>{view}</p>
+          {tags.map((item, idx) => (
+            <Tag key={idx}>{item}</Tag>
+          ))}
         </div>
-        <div>
-          <img src={Person} alt="신청인원" />
-          <p>
-            {apply_count}/{recruitment}
-          </p>
-        </div>
-      </EtcInfo>
-      {ranking && (
-        <Ranking>
-          <Medal rank={ranking} />
-        </Ranking>
-      )}
-    </Container>
+        <TextContents>
+          <div className="title_">
+            <p>{title}</p>
+          </div>
+          <div className="main_text">
+            <p>{content}</p>
+          </div>
+        </TextContents>
+        <EtcInfo>
+          <div>
+            <img src={View} alt="조횟수" />
+            <p>{view}</p>
+          </div>
+          <div>
+            <img src={Person} alt="신청인원" />
+            <p>
+              {apply_count}/{recruitment}
+            </p>
+          </div>
+        </EtcInfo>
+        {ranking && (
+          <Ranking>
+            <Medal rank={ranking} />
+          </Ranking>
+        )}
+      </Container>
+    </>
   );
 };
 
