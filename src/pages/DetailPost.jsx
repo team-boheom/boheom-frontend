@@ -48,7 +48,7 @@ const DetailPost = () => {
       })}
       <ButtonWrapper>
         <Button
-          width="13%"
+          width="15%"
           text="신청하기"
           backgroundColor="#44EA51"
           color="#ffffff"
