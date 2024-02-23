@@ -90,11 +90,18 @@ export const GetMyPost = () => {
 
 export const GetDetailPost = () => {
   const feedId = useRecoilValue(GetPostId);
-  return useQuery(['GetDetailPost'], async () => {
-    const { data } = await instance.get(`/${router}/details/${feedId}`);
-    const arrData = [data];
-    return arrData;
-  });
+  return useQuery(
+    ['GetDetailPost', feedId],
+    async () => {
+      const { data } = await instance.get(`/${router}/details/${feedId}`);
+      let arrData = [data];
+      return arrData;
+    },
+    {
+      enabled: !!feedId,
+      staleTime: 180000,
+    }
+  );
 };
 
 /**
