@@ -5,13 +5,10 @@ import Input from '../common/Input';
 import Button from '../common/Button';
 import { useSignup } from '../utils/api/auth.js';
 import { useForm } from 'react-hook-form';
-import { UserNameAtom } from '../atom/auth.js';
-import { useRecoilState } from 'recoil';
 import toast from 'react-hot-toast';
 
 const Signup = () => {
   const { mutate: PostUserSignup } = useSignup();
-  const [userName, setUserName] = useRecoilState(UserNameAtom);
   const {
     register,
     handleSubmit,
@@ -24,7 +21,6 @@ const Signup = () => {
       toast.error('비밀번호 확인이 일치하지 않습니다.');
     } else {
       PostUserSignup({ account_id, password, nickname });
-      setUserName(nickname);
     }
   };
 

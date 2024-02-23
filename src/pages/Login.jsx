@@ -122,7 +122,6 @@ const StyledLink = styled(Link)`
   color: ${({ theme }) => theme.color.gray500};
   text-decoration: underline;
   text-underline-position: under;
-  margin-top: 50px;
   ${({ theme }) => ({
     fontWeight: theme.fontWeight.regular,
     fontSize: theme.fontSize.body2,
