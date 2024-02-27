@@ -1,19 +1,26 @@
 import Layout from '../components/Layout';
 import styled from '@emotion/styled';
-import { GetDetailPost, useApplyPost } from '../utils/api/feeds';
+import {
+  useCancelApply,
+  GetDetailPost,
+  useApplyPost,
+  useDeletePost,
+} from '../utils/api/feeds';
 import { Person, View } from '../assets';
 import Button from '../common/Button';
 
 const DetailPost = () => {
   const { data: DetailPosts } = GetDetailPost();
   const { mutate: ApplyPosts } = useApplyPost();
+  const { mutate: CancelPosts } = useCancelApply();
+  const { mutate: DeletePosts } = useDeletePost();
   return (
     <Layout>
-      {DetailPosts?.map((item, index) => {
+      {DetailPosts?.map((item, idx) => {
         const tagsArr = item?.tags?.map((tag) => tag).join(' ');
         const Date = item?.created_at?.slice(0, 10);
         return (
-          <div key={index}>
+          <div key={idx}>
             <Container>
               <Tag>{tagsArr}</Tag>
               <Title>
@@ -25,6 +32,7 @@ const DetailPost = () => {
                 <p>
                   모집기간 : {item.start_day} ~ {item.end_day}
                 </p>
+                <div>신청자 보기</div>
               </div>
               <EtcInfo>
                 <div>
@@ -47,13 +55,41 @@ const DetailPost = () => {
         );
       })}
       <ButtonWrapper>
-        <Button
-          width="15%"
-          text="신청하기"
-          backgroundColor="#44EA51"
-          color="#ffffff"
-          onClick={ApplyPosts}
-        />
+        {DetailPosts?.map((item, idx) => {
+          return (
+            item.is_applied && (
+              <Button
+                width="15%"
+                text="취소하기"
+                backgroundColor="#ffffff"
+                color="#FF4249"
+                onClick={CancelPosts}
+                key={idx}
+              />
+            )
+          );
+        })}
+        {DetailPosts?.map((item, idx) => {
+          return item.is_mine ? (
+            <Button
+              width="15%"
+              text="삭제하기"
+              backgroundColor="#FF4249"
+              color="#ffffff"
+              key={idx}
+              onClick={DeletePosts}
+            />
+          ) : (
+            <Button
+              width="15%"
+              text="신청하기"
+              backgroundColor="#44EA51"
+              color="#ffffff"
+              onClick={ApplyPosts}
+              key={idx}
+            />
+          );
+        })}
       </ButtonWrapper>
     </Layout>
   );
@@ -139,6 +175,7 @@ const EtcInfo = styled.div`
 
 const ButtonWrapper = styled.div`
   display: flex;
+  gap: 10px;
   justify-content: center;
   padding-top: 30px;
 `;
