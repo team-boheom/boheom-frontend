@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { instance } from '../axios';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -90,6 +90,7 @@ export const GetMyPost = () => {
 
 export const GetDetailPost = () => {
   const feedId = useRecoilValue(GetPostId);
+
   return useQuery(
     ['GetDetailPost', feedId],
     async () => {
@@ -123,4 +124,52 @@ export const useApplyPost = () => {
       },
     }
   );
+};
+
+/**
+ * @returns 신청한 게시글 취소
+ */
+
+export const useCancelApply = () => {
+  const feedId = useRecoilValue(GetPostId);
+  const navigate = useNavigate();
+  const cancelApplyMutation = useMutation(
+    async () => {
+      return await instance.delete(`/${router}/cancel/${feedId}`);
+    },
+    {
+      onSuccess: () => {
+        toast.success('취소하였습니다.');
+        navigate('/main');
+      },
+      onError: () => {
+        toast.success('오류가 발생하였습니다.');
+      },
+    }
+  );
+  return cancelApplyMutation;
+};
+
+/**
+ * @returns 내가 쓴 게시글 삭제
+ */
+
+export const useDeletePost = () => {
+  const feedId = useRecoilValue(GetPostId);
+  const navigate = useNavigate();
+  const deletePostMutation = useMutation(
+    async () => {
+      return await instance.delete(`/${router}/${feedId}`);
+    },
+    {
+      onSuccess: () => {
+        toast.success('삭제하였습니다.');
+        navigate('/main');
+      },
+      onError: () => {
+        toast.success('오류가 발생하였습니다.');
+      },
+    }
+  );
+  return deletePostMutation;
 };
