@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import Input from '../../common/Input';
-import { useForm } from 'react-hook-form';
 
 const PostForm = ({ register, errors }) => {
   const handleKeyDown = (e) => {
@@ -82,8 +81,6 @@ const FormContainer = styled.div`
     flex: 1;
   }
 `;
-
-const HashTagContaienr = styled.div``;
 
 const ErrorText = styled.p`
   ${({ theme }) => ({
