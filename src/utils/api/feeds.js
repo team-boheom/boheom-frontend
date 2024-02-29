@@ -1,9 +1,4 @@
-import {
-  QueryClient,
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { instance } from '../axios';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
