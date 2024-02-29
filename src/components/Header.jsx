@@ -4,27 +4,32 @@ import { ReactComponent as Boheom } from '../assets/Boheom.svg';
 import SearchInput from './SearchInput';
 import { removeToken } from '../utils/Token';
 import toast from 'react-hot-toast';
+import { useRecoilValue } from 'recoil';
+import { IsSearchInput } from '../atom';
 
 const Header = () => {
+  const IsSearchInputs = useRecoilValue(IsSearchInput);
   const handleLogout = () => {
     removeToken();
     toast.success('로그아웃에 성공했습니다.');
   };
 
   return (
-    <Wrapper>
-      <Link to="/main">
-        <Boheom width="88" height="25" />
-      </Link>
-      <SearchInput />
-      <Content>
-        <StyledLink to="/CreatePost">글 등록하기</StyledLink>
-        <StyledLink to="/mypage">마이페이지</StyledLink>
-        <StyledLink onClick={handleLogout} to="/login">
-          로그아웃
-        </StyledLink>
-      </Content>
-    </Wrapper>
+    <>
+      <Wrapper>
+        <Link to="/main">
+          <Boheom width="88" height="25" />
+        </Link>
+        {IsSearchInputs && <SearchInput />}
+        <Content>
+          <StyledLink to="/CreatePost">글 등록하기</StyledLink>
+          <StyledLink to="/mypage">마이페이지</StyledLink>
+          <StyledLink onClick={handleLogout} to="/login">
+            로그아웃
+          </StyledLink>
+        </Content>
+      </Wrapper>
+    </>
   );
 };
 

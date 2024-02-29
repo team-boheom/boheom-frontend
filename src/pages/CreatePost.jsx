@@ -7,8 +7,12 @@ import Button from '../common/Button';
 import PostForm from '../components/post/PostForm';
 import ContentForm from '../components/post/ContentForm';
 import { useFeeds } from '../utils/api/feeds';
+import { useSetRecoilState } from 'recoil';
+import { IsSearchInput } from '../atom';
+import { useEffect } from 'react';
 
 const CreatePost = () => {
+  const setIsSearchInput = useSetRecoilState(IsSearchInput);
   const { mutate: PostFeeds } = useFeeds();
   const {
     register,
@@ -29,6 +33,13 @@ const CreatePost = () => {
       end_day,
     });
   };
+
+  useEffect(() => {
+    setIsSearchInput((prev) => !prev);
+    return () => {
+      setIsSearchInput((prev) => !prev);
+    };
+  }, []);
 
   return (
     <>
