@@ -4,11 +4,23 @@ import { DefaultProfile } from '../assets';
 import PostCard from '../common/PostCard';
 import { GetMyApplied, GetMyPost, GetUserInfo } from '../utils/api/feeds';
 import { HandMouse, FaceEye } from '../assets/index';
+import { useSetRecoilState } from 'recoil';
+import { IsSearchInput } from '../atom';
+import { useEffect } from 'react';
 
 const MyPage = () => {
   const { data: UserInfo } = GetUserInfo();
   const { data: MyPost = [] } = GetMyPost();
   const { data: MyApply = [] } = GetMyApplied();
+
+  const setIsSearchInput = useSetRecoilState(IsSearchInput);
+
+  useEffect(() => {
+    setIsSearchInput((prev) => !prev);
+    return () => {
+      setIsSearchInput((prev) => !prev);
+    };
+  }, []);
 
   return (
     <Layout>

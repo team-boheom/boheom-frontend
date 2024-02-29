@@ -10,17 +10,20 @@ import { Person, View, GreenCheck, UpGreenCheck } from '../assets';
 import Button from '../common/Button';
 import { useState } from 'react';
 import Dropdown from '../components/post/DropDown';
-import { useSetRecoilState } from 'recoil';
-import { IsSearchInput } from '../atom';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { GetPostId, IsSearchInput } from '../atom';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const DetailPost = () => {
   const { data: DetailPosts } = GetDetailPost();
   const { mutate: ApplyPosts } = useApplyPost();
   const { mutate: CancelPosts } = useCancelApply();
   const { mutate: DeletePosts } = useDeletePost();
+  const navigate = useNavigate();
   const [view, setView] = useState(false);
   const setIsSearchInput = useSetRecoilState(IsSearchInput);
+  const feedID = useRecoilValue(GetPostId);
 
   useEffect(() => {
     setIsSearchInput((prev) => !prev);
@@ -99,14 +102,22 @@ const DetailPost = () => {
         })}
         {DetailPosts?.map((item, idx) => {
           return item.is_mine ? (
-            <Button
-              width="15%"
-              text="삭제하기"
-              backgroundColor="#FF4249"
-              color="#ffffff"
-              key={idx}
-              onClick={DeletePosts}
-            />
+            <>
+              <Button
+                width="15%"
+                text="삭제하기"
+                backgroundColor="#FF4249"
+                color="#ffffff"
+                key={idx}
+                onClick={DeletePosts}
+              />
+              <Button
+                width="15%"
+                text="수정하기"
+                backgroundColor="#C7C7C7"
+                onClick={() => navigate(`/correction/:${feedID}`)}
+              />
+            </>
           ) : (
             <Button
               width="15%"

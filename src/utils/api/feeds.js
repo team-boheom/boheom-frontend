@@ -1,4 +1,9 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import {
+  QueryClient,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
 import { instance } from '../axios';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -138,10 +143,6 @@ export const useCancelApply = () => {
       return await instance.delete(`/${router}/cancel/${feedId}`);
     },
     {
-      enabled: !!feedId,
-      staleTime: Infinity,
-    },
-    {
       onSuccess: () => {
         toast.success('취소하였습니다.');
         navigate('/main');
@@ -166,10 +167,6 @@ export const useDeletePost = () => {
       return await instance.delete(`/${router}/${feedId}`);
     },
     {
-      enabled: !!feedId,
-      staleTime: Infinity,
-    },
-    {
       onSuccess: () => {
         toast.success('삭제하였습니다.');
         navigate('/main');
@@ -188,15 +185,35 @@ export const useDeletePost = () => {
 
 export const GetApplyUserList = () => {
   const feedId = useRecoilValue(GetPostId);
-  return useQuery(
-    ['GetApplyUserList', feedId],
-    async () => {
-      const { data } = await instance.get(`/${router}/apply-user/${feedId}`);
-      return data.users;
+  return useQuery(['GetApplyUserList', feedId], async () => {
+    const { data } = await instance.get(`/${router}/apply-user/${feedId}`);
+    return data.users;
+  });
+};
+
+/**
+ * @returns 글 수정하기
+ */
+
+export const useCorreectionPost = () => {
+  const navigate = useNavigate();
+  const feedId = useRecoilValue(GetPostId);
+  const queryClient = useQueryClient();
+  return useMutation(
+    async (params) => {
+      return await instance.patch(`/${router}/${feedId}`, params);
     },
     {
-      enabled: !!feedId,
-      staleTime: Infinity,
+      onError: () => {
+        toast.error('글 수정에 실패했습니다.');
+      },
+      onSuccess: () => {
+        toast.success('글 수정에 성공했습니다.');
+        queryClient.invalidateQueries(['GetDetailPost', feedId], {
+          exact: true,
+        });
+        navigate('/main');
+      },
     }
   );
 };

@@ -6,14 +6,14 @@ import Header from '../components/Header';
 import Button from '../common/Button';
 import PostForm from '../components/post/PostForm';
 import ContentForm from '../components/post/ContentForm';
-import { useFeeds } from '../utils/api/feeds';
+import { useCorreectionPost } from '../utils/api/feeds';
 import { useSetRecoilState } from 'recoil';
 import { IsSearchInput } from '../atom';
 import { useEffect } from 'react';
 
-const CreatePost = () => {
+const CorrectionPost = () => {
   const setIsSearchInput = useSetRecoilState(IsSearchInput);
-  const { mutate: PostFeeds } = useFeeds();
+  const { mutate: CorreectionPost } = useCorreectionPost();
   const {
     register,
     handleSubmit,
@@ -24,7 +24,7 @@ const CreatePost = () => {
     const regeax = /#[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|\w);]+/g;
     const tag = data.tag.match(regeax);
     const { title, content, recruitment, start_day, end_day } = data;
-    PostFeeds({
+    CorreectionPost({
       tag,
       title,
       content,
@@ -48,8 +48,8 @@ const CreatePost = () => {
         <TitleContainer>
           <img src={Arrow} alt="Title Img" />
           <TitleWrapper>
-            <p className="red">모집글 작성</p>
-            <p className="black">모험을 시작해볼까요?</p>
+            <p className="red">글 수정하기</p>
+            <p className="black">글 수정을 진행할게요.</p>
           </TitleWrapper>
         </TitleContainer>
         <FormWrapper>
@@ -66,7 +66,7 @@ const CreatePost = () => {
                 disabled={isSubmitting}
               />
               <Button
-                text="등록"
+                text="수정하기"
                 type="submit"
                 width="15%"
                 backgroundColor="#44EA51"
@@ -123,4 +123,4 @@ const ButtonContainer = styled.div`
   padding-top: 50px;
 `;
 
-export default CreatePost;
+export default CorrectionPost;

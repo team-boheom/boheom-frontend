@@ -8,6 +8,7 @@ import Signup from '../pages/Signup';
 import OutletRouter from './OutlitRouter';
 import Landing from '../pages/Landing';
 import DetailPost from '../pages/DetailPost';
+import CorrectionPost from '../pages/CorrectionPost';
 
 const MainRouter = () => {
   return (
@@ -19,6 +20,7 @@ const MainRouter = () => {
             <Route path="" element={<PostPage />} />
             <Route path=":id" element={<DetailPost />} />
           </Route>
+          <Route path="/correction/:id" element={<CorrectionPost />} />
           <Route path="/CreatePost" element={<CreatePostPage />} />
           <Route path="/mypage" element={<MyPage />} />
         </Route>
