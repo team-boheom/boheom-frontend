@@ -48,8 +48,8 @@ const CreatePost = () => {
         <TitleContainer>
           <img src={Arrow} alt="Title Img" />
           <TitleWrapper>
-            <p>모집글 작성</p>
-            <p>모험을 시작해볼까요?</p>
+            <p className="red">모집글 작성</p>
+            <p className="black">모험을 시작해볼까요?</p>
           </TitleWrapper>
         </TitleContainer>
         <FormWrapper>
@@ -97,11 +97,11 @@ const TitleWrapper = styled.div`
   padding-left: 20px;
   font-weight: ${({ theme }) => theme.fontWeight.bold};
   font-size: ${({ theme }) => theme.fontSize.header1};
-  > :nth-child(1) {
+  > .red {
     color: ${({ theme }) => theme.color.red};
     padding-bottom: 5px;
   }
-  > :nth-child(2) {
+  > .black {
     color: ${({ theme }) => theme.color.black};
   }
 `;
