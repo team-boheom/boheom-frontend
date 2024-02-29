@@ -6,14 +6,29 @@ import {
   useApplyPost,
   useDeletePost,
 } from '../utils/api/feeds';
-import { Person, View } from '../assets';
+import { Person, View, GreenCheck, UpGreenCheck } from '../assets';
 import Button from '../common/Button';
+import { useState } from 'react';
+import Dropdown from '../components/post/DropDown';
+import { useSetRecoilState } from 'recoil';
+import { IsSearchInput } from '../atom';
+import { useEffect } from 'react';
 
 const DetailPost = () => {
   const { data: DetailPosts } = GetDetailPost();
   const { mutate: ApplyPosts } = useApplyPost();
   const { mutate: CancelPosts } = useCancelApply();
   const { mutate: DeletePosts } = useDeletePost();
+  const [view, setView] = useState(false);
+  const setIsSearchInput = useSetRecoilState(IsSearchInput);
+
+  useEffect(() => {
+    setIsSearchInput((prev) => !prev);
+    return () => {
+      setIsSearchInput((prev) => !prev);
+    };
+  }, []);
+
   return (
     <Layout>
       {DetailPosts?.map((item, idx) => {
@@ -27,12 +42,25 @@ const DetailPost = () => {
                 <p>{item.title}</p>
               </Title>
               <div className="detail">
-                <p className="name">{item.username}</p> ·
-                <p className="date">작성날짜 : {Date}</p> ·
-                <p>
-                  모집기간 : {item.start_day} ~ {item.end_day}
-                </p>
-                <div>신청자 보기</div>
+                <div className="child">
+                  <Name>{item.username}</Name> ·<p className="date">{Date}</p> ·
+                  <div>
+                    모집기간 : {item.start_day} ~ {item.end_day}
+                  </div>
+                </div>
+                <div className="list">
+                  <ul onClick={() => setView((prev) => !prev)}>
+                    {view ? (
+                      <img src={UpGreenCheck} alt="up-check" />
+                    ) : (
+                      <ApplyPerson>
+                        <img src={GreenCheck} alt="down-check" />
+                        <p>신청자보기</p>
+                      </ApplyPerson>
+                    )}
+                    {view && <Dropdown />}
+                  </ul>
+                </div>
               </div>
               <EtcInfo>
                 <div>
@@ -102,20 +130,30 @@ const Container = styled.div`
   outline-color: ${({ theme }) => theme.color.green150};
   > .detail {
     display: flex;
-    gap: 7px;
-    > .name {
+    justify-content: space-between;
+    > .list {
+      gap: 8px;
+      display: flex;
+      align-items: center;
+      padding: 8px 12px;
+      background: #ffffff;
+      border-radius: 8px;
       ${({ theme }) => ({
         fontSize: theme.fontSize.body1,
-        fontWeight: theme.fontWeight.semibold,
-        color: theme.color.black,
-      })}
+        fontWeight: theme.fontWeight.medium,
+        color: theme.color.green700,
+      })};
     }
-    > .date {
-      ${({ theme }) => ({
-        fontSize: theme.fontSize.body1,
-        fontWeight: theme.fontWeight.reguler,
-        color: theme.color.gray500,
-      })}
+    > .child {
+      display: flex;
+      gap: 5px;
+      > .date {
+        ${({ theme }) => ({
+          fontSize: theme.fontSize.body1,
+          fontWeight: theme.fontWeight.reguler,
+          color: theme.color.gray500,
+        })};
+      }
     }
   }
 `;
@@ -139,6 +177,21 @@ const Title = styled.div`
       color: theme.color.black,
     })}
   }
+`;
+
+const Name = styled.p`
+  ${({ theme }) => ({
+    fontSize: theme.fontSize.body1,
+    fontWeight: theme.fontWeight.semibold,
+    color: theme.color.black,
+  })}
+`;
+
+const ApplyPerson = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 `;
 
 const Content = styled.div`

@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { instance } from '../axios';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -100,7 +100,7 @@ export const GetDetailPost = () => {
     },
     {
       enabled: !!feedId,
-      staleTime: 180000,
+      staleTime: Infinity,
     }
   );
 };
@@ -138,6 +138,10 @@ export const useCancelApply = () => {
       return await instance.delete(`/${router}/cancel/${feedId}`);
     },
     {
+      enabled: !!feedId,
+      staleTime: Infinity,
+    },
+    {
       onSuccess: () => {
         toast.success('취소하였습니다.');
         navigate('/main');
@@ -162,6 +166,10 @@ export const useDeletePost = () => {
       return await instance.delete(`/${router}/${feedId}`);
     },
     {
+      enabled: !!feedId,
+      staleTime: Infinity,
+    },
+    {
       onSuccess: () => {
         toast.success('삭제하였습니다.');
         navigate('/main');
@@ -172,4 +180,23 @@ export const useDeletePost = () => {
     }
   );
   return deletePostMutation;
+};
+
+/**
+ * @returns 작성한 게시글 조회
+ */
+
+export const GetApplyUserList = () => {
+  const feedId = useRecoilValue(GetPostId);
+  return useQuery(
+    ['GetApplyUserList', feedId],
+    async () => {
+      const { data } = await instance.get(`/${router}/apply-user/${feedId}`);
+      return data.users;
+    },
+    {
+      enabled: !!feedId,
+      staleTime: Infinity,
+    }
+  );
 };
