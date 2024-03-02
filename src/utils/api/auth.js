@@ -53,13 +53,12 @@ export const useSignup = () => {
             toast.error('사용자 권한이 없습니다.');
             break;
           case 404:
-            toast.error('유저 정보가 일치하지 않습니다.');
+            toast.error('오류가 발생하였습니다.');
             break;
           case 409:
             toast.error('이미 가입된 유저 입니다!');
             break;
           default:
-            toast.error('오류가 발생하였습니다.');
         }
       },
       onSuccess: () => {
