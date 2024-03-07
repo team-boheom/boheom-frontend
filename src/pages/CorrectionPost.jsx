@@ -10,9 +10,11 @@ import { useCorreectionPost } from '../utils/api/feeds';
 import { useSetRecoilState } from 'recoil';
 import { IsSearchInput } from '../atom';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const CorrectionPost = () => {
   const setIsSearchInput = useSetRecoilState(IsSearchInput);
+  const navigate = useNavigate();
   const { mutate: CorreectionPost } = useCorreectionPost();
   const {
     register,
@@ -64,6 +66,7 @@ const CorrectionPost = () => {
                 color="#828282"
                 backgroundColor="#ffffff"
                 disabled={isSubmitting}
+                onClick={() => navigate(-1)}
               />
               <Button
                 text="수정하기"
